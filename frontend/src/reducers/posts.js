@@ -1,4 +1,4 @@
-import {POSTS_SEARCHED, POSTS_LOADED, POSTS_VOTED} from '../utils/ActionTypes'
+import {POSTS_SEARCHED, POSTS_LOADED, POST_VOTED} from '../utils/ActionTypes'
 
 const INITIAL_STATE = {
     post: {},
@@ -11,7 +11,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, list: action.posts }
         case POSTS_LOADED:
             return { ...state, post: action.objetoPost }
-        case POSTS_VOTED:
+        case POST_VOTED:
             return { ...state, post: action.postVoted }
         default:
             return state

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {get, votar} from '../actions/post'
+import {get, vote} from '../actions/post'
 
 class PostShow extends Component {
 
@@ -15,7 +15,7 @@ class PostShow extends Component {
     }
 
     handleClick = (post, type) => {
-        this.props.votar(post, type)
+        this.props.vote(post, type)
     }
 
     render() {
@@ -26,13 +26,13 @@ class PostShow extends Component {
                 {post.body}
                 <hr />
                 Score: {post.voteScore}
-                <button onClick={() => this.handleClick(post, 'up')}>UP</button>
-                <button onClick={() => this.handleClick(post, 'down')}>DOWN</button>
+                <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
+                <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({objeto: state.postReducer.post})
-const mapDispatchToProps = { get, votar }
+const mapDispatchToProps = { get, vote }
 export default connect(mapStateToProps, mapDispatchToProps)(PostShow)

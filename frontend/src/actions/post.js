@@ -1,6 +1,6 @@
 
 import * as PostsApi from '../utils/PostsAPI';
-import {POSTS_LOADED, POSTS_SEARCHED, POSTS_VOTED} from "../utils/ActionTypes";
+import {POSTS_LOADED, POSTS_SEARCHED, POST_VOTED} from "../utils/ActionTypes";
 
 export const get = (postId) => {
     return (dispatch) => {
@@ -16,12 +16,19 @@ export const search = () => {
     }
 }
 
-export const votar = (post, type) => {
-    let newScore = 0
-    if(type === "up") {
-        newScore = post.voteScore + 1
-    } else {
-        newScore = post.voteScore - 1
+// export const votar = (post, type) => {
+//     let newScore = 0
+//     if(type === "upVote") {
+//         newScore = post.voteScore + 1
+//     } else {
+//         newScore = post.voteScore - 1
+//     }
+//     PostsApi.vote(post, type);
+//     return {type: POSTS_VOTED, postVoted: {...post, voteScore: newScore }}
+// }
+
+export const vote = (post, vote) => {
+    return (dispatch) => {
+        return PostsApi.vote(post, vote).then((post) => dispatch({type: POST_VOTED, postVoted: post}))
     }
-    return {type: POSTS_VOTED, postVoted: {...post, voteScore: newScore }}
 }
