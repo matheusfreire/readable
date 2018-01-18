@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { get, vote } from '../actions/post'
+import { get, vote} from '../actions/post'
 
 class PostShow extends Component {
 
@@ -9,9 +9,11 @@ class PostShow extends Component {
     }
 
     componentDidMount() {
-        this.props.get(this.props.match.params.id).then(() => {
-            this.setState({ loading: false })
-        })
+        if(this.props.match.params.id !== 'undefined'){
+            this.props.get(this.props.match.params.id).then(() => {
+                this.setState({ loading: false })
+            })
+        } 
     }
 
     handleClick = (post, type) => {
@@ -34,5 +36,5 @@ class PostShow extends Component {
 }
 
 const mapStateToProps = state => ({ objeto: state.postReducer.post })
-const mapDispatchToProps = { get, vote }
+const mapDispatchToProps = { get, vote}
 export default connect(mapStateToProps, mapDispatchToProps)(PostShow)

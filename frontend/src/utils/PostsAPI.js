@@ -10,6 +10,11 @@ export const getAll = () =>
     fetch(`${api}/posts`, { headers })
         .then(res => res.json())
         .then(data => data)
+
+export const getAllByCategory = (category) =>
+    fetch(`${api}/${category}/posts`, { headers })
+        .then(res => res.json())
+        .then(data => data)
         
 export const update = (post) =>
   fetch(`${api}/posts/${post.id}`, {

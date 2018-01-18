@@ -27,7 +27,7 @@ class Categories extends Component {
                 ): (
                     <div>
                         {categories.map((category) => (
-                            <Link to={`/${category.path}/posts`}>{category.name}{' '}</Link>
+                            <Link to={`/${category.path}/posts`}>{category.name}</Link>
                         ))}
                     </div>
                 )}

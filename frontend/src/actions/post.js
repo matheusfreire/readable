@@ -1,11 +1,17 @@
 
 import * as PostsApi from '../utils/PostsAPI';
-import { POSTS_LOADED, POSTS_SEARCHED, POST_VOTED } from "../utils/ActionTypes";
+import { POSTS_LOADED, POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY } from "../utils/ActionTypes";
 
 export const get = (postId) => {
     return (dispatch) => {
         return PostsApi.get(postId)
             .then((objeto) => dispatch({ type: POSTS_LOADED, objetoPost: objeto }))
+    }
+}
+
+export const getByCategory = (category) => {
+    return (dispatch) => {
+        return PostsApi.getAllByCategory(category).then((posts) => dispatch({ type: POSTS_SEARCHED_BY_CATEGORY, posts: posts }))
     }
 }
 
@@ -16,16 +22,6 @@ export const search = () => {
     }
 }
 
-// export const votar = (post, type) => {
-//     let newScore = 0
-//     if(type === "upVote") {
-//         newScore = post.voteScore + 1
-//     } else {
-//         newScore = post.voteScore - 1
-//     }
-//     PostsApi.vote(post, type);
-//     return {type: POSTS_VOTED, postVoted: {...post, voteScore: newScore }}
-// }
 
 export const vote = (post, vote) => {
     return (dispatch) => {
