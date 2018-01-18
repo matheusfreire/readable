@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { get, vote} from '../actions/post'
+import ListComments from './ListComments';
 
 class PostShow extends Component {
 
@@ -24,12 +25,19 @@ class PostShow extends Component {
         const post = this.props.objeto
         return (
             <div>
-                <h1>POST SHOW - {post.category}</h1>
-                {post.body}
-                <hr />
-                Score: {post.voteScore}
-                <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
-                <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
+                {this.state.loading ? (
+                    <span>Carregando</span>
+                ):( 
+                    <div>
+                        <h1>POST SHOW - {post.category}</h1>
+                        {post.body}
+                        <hr />
+                        Score: {post.voteScore}
+                        <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
+                        <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
+                        <ListComments postId={post.id} />
+                    </div>
+                )}
             </div>
         );
     }

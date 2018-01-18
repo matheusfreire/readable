@@ -31,7 +31,7 @@ class App extends Component {
                     <Route path="/about" component={() => (<h1>About TETEU</h1>)}/>
                     <Route path="/posts/new" component={PostForm}/>
                     <Route path="/posts/:id" component={PostShow}/>
-                    <Route exact path="/:category/post" component={ListPostByCategory}/>
+                    <Route path="/:category/post" component={ListPostByCategory}/>
                 </Switch>
 
             </div>

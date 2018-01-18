@@ -14,6 +14,7 @@ import {Switch} from 'react-router'
 import App from './App'
 import post from './reducers/posts'
 import categories from './reducers/categories'
+import comments from './reducers/comments'
 
 const history = createHistory()
 
@@ -24,7 +25,8 @@ const store = createStore(
     combineReducers({
         routerReducer,
         postReducer: post,
-        categoriesReducer: categories
+        categoriesReducer: categories,
+        commentReducer: comments
     }),
     composeWithDevTools(applyMiddleware(...middlewares)),
 )
