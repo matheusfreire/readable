@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { search } from "../actions/post";
 import { Link } from 'react-router-dom'
@@ -18,10 +18,10 @@ class Home extends Component {
                     list.map((post) => (
                         <div>
                             {post.body}
-                            <br/>
+                            <br />
                             <Link to={`/posts/${post.id}`}>Show</Link>
-                            <br/>
-                            <hr/>
+                            <br />
+                            <hr />
                         </div>
                     ))
                 }
@@ -31,6 +31,6 @@ class Home extends Component {
     }
 }
 
-const mapStateToProps = state => ({list: state.postReducer.list})
+const mapStateToProps = state => ({ list: state.postReducer.list })
 const mapDispatchToProps = { search }
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

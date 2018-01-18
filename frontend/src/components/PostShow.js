@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {get, vote} from '../actions/post'
+import { get, vote } from '../actions/post'
 
 class PostShow extends Component {
 
@@ -10,7 +10,7 @@ class PostShow extends Component {
 
     componentDidMount() {
         this.props.get(this.props.match.params.id).then(() => {
-            this.setState({ loading: false})
+            this.setState({ loading: false })
         })
     }
 
@@ -33,6 +33,6 @@ class PostShow extends Component {
     }
 }
 
-const mapStateToProps = state => ({objeto: state.postReducer.post})
+const mapStateToProps = state => ({ objeto: state.postReducer.post })
 const mapDispatchToProps = { get, vote }
 export default connect(mapStateToProps, mapDispatchToProps)(PostShow)

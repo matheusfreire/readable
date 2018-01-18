@@ -13,6 +13,7 @@ import {Switch} from 'react-router'
 
 import App from './App'
 import post from './reducers/posts'
+import categories from './reducers/categories'
 
 const history = createHistory()
 
@@ -22,7 +23,8 @@ const middlewares = [multi, thunk, routerMiddlewareHistory];
 const store = createStore(
     combineReducers({
         routerReducer,
-        postReducer: post
+        postReducer: post,
+        categoriesReducer: categories
     }),
     composeWithDevTools(applyMiddleware(...middlewares)),
 )
