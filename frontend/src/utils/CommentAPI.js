@@ -6,7 +6,8 @@ export const get = (commentId) =>
 
 
 export const getAllByPost = (postId) =>
-    fetch(`${api}/post/${postId}/comments`).then(res => res.json()).then(data => data)
+    fetch(`${api}/posts/${postId}/comments`, { headers })
+        .then(res => res.json()).then(data => data)
 
         
 export const update = (comment) =>

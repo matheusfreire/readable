@@ -26,15 +26,19 @@ class ListComments extends Component {
                     <span>Carregando</span>
                 ):(
                     <div>
-                        <h1>Comments SHOW</h1>
-                            {comments.map((comment) => (
-                                <div>
-                                    Comment: {comment.body} - Made by {comment.author}
-                                    <button onClick={() => this.handleClick(comment, 'upVote')}>UP</button>
-                                    <button onClick={() => this.handleClick(comment, 'downVote')}>DOWN</button>
-                                </div>
-                            ))}
-                        <hr />
+                        {comments &&(
+                            <div>
+                            <h1>Comments SHOW</h1>
+                                {comments.map((comment) => (
+                                    <div>
+                                        Comment: {comment.body} - Made by {comment.author}
+                                        <button onClick={() => this.handleClick(comment, 'upVote')}>UP</button>
+                                        <button onClick={() => this.handleClick(comment, 'downVote')}>DOWN</button>
+                                    </div>
+                                ))}
+                            <hr />
+                        </div>
+                        )}
                     </div>
                 )}
                 

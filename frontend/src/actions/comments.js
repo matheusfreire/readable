@@ -4,7 +4,7 @@ import { GET_COMMENTS_POST, COMMENT_VOTED } from '../utils/ActionTypes';
 
 export const getByPost = (postId) => {
     return (dispatch) => {
-        return CommentApi.getAllByPost(postId).then((data) => dispatch({ type: GET_COMMENTS_POST, comments: data.comments}))
+        return CommentApi.getAllByPost(postId).then((comments) => dispatch({ type: GET_COMMENTS_POST, comments: comments}))
     }
 }
 
