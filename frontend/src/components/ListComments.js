@@ -32,6 +32,8 @@ class ListComments extends Component {
                                 {comments.map((comment) => (
                                     <div>
                                         Comment: {comment.body} - Made by {comment.author}
+                                        <br/>
+                                        Score: {comment.voteScore}
                                         <button onClick={() => this.handleClick(comment, 'upVote')}>UP</button>
                                         <button onClick={() => this.handleClick(comment, 'downVote')}>DOWN</button>
                                     </div>

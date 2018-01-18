@@ -10,6 +10,6 @@ export const getByPost = (postId) => {
 
 export const vote = (comment, vote) => {
     return (dispatch) => {
-        return CommentApi.vote(comment, vote).then((result) => dispatch({ type: COMMENT_VOTED, commentVoted: result.comment }))
+        return CommentApi.vote(comment, vote).then((result) => dispatch({ type: COMMENT_VOTED, commentVoted: result }))
     }
 }
