@@ -15,6 +15,13 @@ export const getAllByCategory = (category) =>
     fetch(`${api}/${category}/posts`, { headers })
         .then(res => res.json())
         .then(data => data)
+
+export const create = (id, timestamp, title, body, author, category) =>
+  fetch(`${api}/posts`, {
+    method: 'POST',
+    headers: {headers},
+    body: JSON.stringify({ id: id, timestamp: timestamp, title: title, body: body, author: author, category: category})
+  }).then(res => res.json())
         
 export const update = (post) =>
   fetch(`${api}/posts/${post.id}`, {
