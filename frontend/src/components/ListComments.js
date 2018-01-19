@@ -29,12 +29,12 @@ class ListComments extends Component {
                     <div>
                         {comments &&(
                             <div>
-                            <h1>Comments SHOW</h1>
-                                {comments.map((comment) => (
-                                    <CommentShow key={comment.id} comment={comment} />
-                                ))}
-                            <hr />
-                        </div>
+                                <h1>Comments SHOW</h1>
+                                    {comments.map((comment) => (
+                                        <CommentShow key={comment.id} comment={comment} />
+                                    ))}
+                                <hr />
+                            </div>
                         )}
                     </div>
                 )}

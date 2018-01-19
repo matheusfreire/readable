@@ -4,6 +4,7 @@ import { vote} from '../actions/comments'
 
 class CommentShow extends Component {
 
+
     handleClick = (comment, type) => {
         this.props.vote(comment, type)
     }
@@ -26,6 +27,5 @@ class CommentShow extends Component {
     }
 }
 
-const mapStateToProps = state => ({ comment: state.commentReducer.comment })
 const mapDispatchToProps = {vote}
-export default connect(mapStateToProps, mapDispatchToProps)(CommentShow)
+export default connect(null, mapDispatchToProps)(CommentShow)

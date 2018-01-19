@@ -11,7 +11,13 @@ export default (state = INITIAL_STATE, action) => {
         case GET_COMMENTS_POST:
             return { ...state, comments: action.comments}
         case COMMENT_VOTED:
-            return { ...state, comment: action.commentVoted }
+            let newComments = state.comments.map((c) => {
+                if (c.id === action.commentVoted.id) {
+                    return action.commentVoted;
+                }
+                return c
+            })
+            return { ...state, comments: newComments }
         case GET_COMMENT:
             return { ...state, comment: action.comment }
         default:
