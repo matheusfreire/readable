@@ -2,7 +2,7 @@ import { api, headers} from './Api'
 
 export const get = (commentId) =>
     fetch(`${api}/comments/${commentId}`, { headers })
-        .then(res => res.json())
+        .then(res => res.json()).then(data => data)
 
 
 export const getAllByPost = (postId) =>

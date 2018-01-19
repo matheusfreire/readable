@@ -1,4 +1,4 @@
-import { GET_COMMENTS_POST, COMMENT_VOTED } from "../utils/ActionTypes";
+import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT } from "../utils/ActionTypes";
 
 
 const INITIAL_STATE = {
@@ -12,6 +12,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, comments: action.comments}
         case COMMENT_VOTED:
             return { ...state, comment: action.commentVoted }
+        case GET_COMMENT:
+            return { ...state, comment: action.comment }
         default:
             return state
     }

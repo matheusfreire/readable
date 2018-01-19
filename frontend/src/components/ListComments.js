@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getByPost, vote} from '../actions/comments'
+import CommentShow from './CommentShow';
 
 class ListComments extends Component {
 
@@ -30,13 +31,7 @@ class ListComments extends Component {
                             <div>
                             <h1>Comments SHOW</h1>
                                 {comments.map((comment) => (
-                                    <div>
-                                        Comment: {comment.body} - Made by {comment.author}
-                                        <br/>
-                                        Score: {comment.voteScore}
-                                        <button onClick={() => this.handleClick(comment, 'upVote')}>UP</button>
-                                        <button onClick={() => this.handleClick(comment, 'downVote')}>DOWN</button>
-                                    </div>
+                                    <CommentShow key={comment.id} comment={comment} />
                                 ))}
                             <hr />
                         </div>
