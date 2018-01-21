@@ -15,6 +15,7 @@ import App from './App'
 import post from './reducers/posts'
 import categories from './reducers/categories'
 import comments from './reducers/comments'
+import { reducer as formReducer } from 'redux-form'
 
 const history = createHistory()
 
@@ -26,7 +27,8 @@ const store = createStore(
         routerReducer,
         postReducer: post,
         categoriesReducer: categories,
-        commentReducer: comments
+        commentReducer: comments,
+        form: formReducer
     }),
     composeWithDevTools(applyMiddleware(...middlewares)),
 )

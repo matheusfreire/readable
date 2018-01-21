@@ -16,10 +16,10 @@ class Home extends Component {
                 <h1>Home Posts</h1>
                 {
                     list.map((post) => (
-                        <div>
+                        <div key={post.id}>
                             {post.body}
                             <br />
-                            <Link to={`/posts/${post.id}`}>Show</Link>
+                            <Link key={post.id} to={`/posts/${post.id}`}>Show</Link>
                             <br />
                             <hr />
                         </div>

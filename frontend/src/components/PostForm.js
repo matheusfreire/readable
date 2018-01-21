@@ -11,9 +11,10 @@ class PostForm extends Component {
         this.props.getAllCategories()
     }
 
-    submit = (title, body,author, category) => {
+    submit = (values) => {
+        console.log(values)
         const uuidv4 = require('uuid/v4');
-        this.props.add({id: uuidv4(),timestamp: Date.now(),title: title, body: body, author: author, category:category}).then(() => {
+        this.props.add({id: uuidv4(),timestamp: Date.now(),title: values.title, body: values.body, author: values.author, category:values.category}).then(() => {
 
         })
     }
@@ -32,6 +33,13 @@ class PostForm extends Component {
                     <label>Author</label>
                     <div>
                         <Field name="author" component="input" type="text" placeholder="Title" />
+                    </div>
+                </div>
+
+                <div>
+                    <label>Body</label>
+                    <div>
+                        <Field name="body" component="input" type="textarea" placeholder="Body" />
                     </div>
                 </div>
 

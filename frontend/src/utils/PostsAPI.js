@@ -19,7 +19,10 @@ export const getAllByCategory = (category) =>
 export const create = (id, timestamp, title, body, author, category) =>
   fetch(`${api}/posts`, {
     method: 'POST',
-    headers: {headers},
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ id: id, timestamp: timestamp, title: title, body: body, author: author, category: category})
   }).then(res => res.json())
         

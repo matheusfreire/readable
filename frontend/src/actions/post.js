@@ -29,8 +29,8 @@ export const vote = (post, vote) => {
     }
 }
 
-export const add = (id,timestamp,title, body, author, category) => {
+export const add = (post) => {
     return (dispatch) => {
-        return PostsApi.create(id,timestamp,title,body,author,category).then((post) => dispatch({type: POST_CREATED, post: post}))
+        return PostsApi.create(post.id,post.timestamp,post.title,post.body,post.author,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
     }
 }
