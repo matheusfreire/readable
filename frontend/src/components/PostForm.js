@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { add } from '../actions/post';
 import { Field, reduxForm } from 'redux-form';
-import {getAllCategories} from '../actions/categories'
+import {getAllCategories} from '../actions/categories';
+import { Redirect } from 'react-router'
 
 class PostForm extends Component {
+
+    state = {
+        redirectToHome: false
+    }
 
 
     componentWillMount(){
@@ -15,57 +20,64 @@ class PostForm extends Component {
         console.log(values)
         const uuidv4 = require('uuid/v4');
         this.props.add({id: uuidv4(),timestamp: Date.now(),title: values.title, body: values.body, author: values.author, category:values.category}).then(() => {
-
+            this.setState({redirectToHome: true})
         })
     }
     
     render() {
-        const { handleSubmit, reset, submitting } = this.props
-        return (
-            <form onSubmit={handleSubmit(this.submit)}>
-                <div>
-                    <label>Title</label>
+        
+        if (this.state.redirectToHome) {
+            return (
+            <Redirect to="/"/>
+            )
+        } else {
+            const { handleSubmit, reset, submitting } = this.props
+            return (
+                <form onSubmit={handleSubmit(this.submit)}>
                     <div>
-                        <Field name="title" component="input" type="text" placeholder="Title" />
+                        <label>Title</label>
+                        <div>
+                            <Field name="title" component="input" type="text" placeholder="Title" />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label>Author</label>
                     <div>
-                        <Field name="author" component="input" type="text" placeholder="Title" />
+                        <label>Author</label>
+                        <div>
+                            <Field name="author" component="input" type="text" placeholder="Title" />
+                        </div>
                     </div>
-                </div>
-
-                <div>
-                    <label>Body</label>
+    
                     <div>
-                        <Field name="body" component="input" type="textarea" placeholder="Body" />
+                        <label>Body</label>
+                        <div>
+                            <Field name="body" component="input" type="textarea" placeholder="Body" />
+                        </div>
                     </div>
-                </div>
-
-                <div>
-                    <label>Categories</label>
+    
                     <div>
-                        <Field name="category" component="select">
-                            <option value="">Select a category...</option>
-                            {this.props.categories.map((c, idx) => (
-                                <option value={c.path} key={idx}>
-                                    {c.name}
-                                </option>
-                            ))}
-                        </Field>
+                        <label>Categories</label>
+                        <div>
+                            <Field name="category" component="select">
+                                <option value="">Select a category...</option>
+                                {this.props.categories.map((c, idx) => (
+                                    <option value={c.path} key={idx}>
+                                        {c.name}
+                                    </option>
+                                ))}
+                            </Field>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <button type="submit" disabled={submitting}>
-                            Submit
-                    </button>
-                        <button type="button" disabled={submitting} onClick={reset}>
-                            Clear Values
-                    </button>
-                </div>
-            </form>
-        )
+                    <div>
+                        <button type="submit" disabled={submitting}>
+                                Submit
+                        </button>
+                            <button type="button" disabled={submitting} onClick={reset}>
+                                Clear Values
+                        </button>
+                    </div>
+                </form>
+            )
+        }
     }
 }
 
