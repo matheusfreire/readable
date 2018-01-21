@@ -1,112 +1,85 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { add } from '../actions/post';
-import { uuid } from 'uuid/v4';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import {getAllCategories} from '../actions/categories'
 
 class PostForm extends Component {
+
+
+    componentWillMount(){
+        this.props.getAllCategories()
+    }
+
+    submit = (title, body,author, category) => {
+        const uuidv4 = require('uuid/v4');
+        this.props.add({id: uuidv4(),timestamp: Date.now(),title: title, body: body, author: author, category:category}).then(() => {
+
+        })
+    }
     
     render() {
-        const { handleSubmit, pristine, reset, submitting } = this.props
+        const { handleSubmit, reset, submitting } = this.props
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(this.submit)}>
                 <div>
-                    <label>First Name</label>
+                    <label>Title</label>
                     <div>
-                        <Field
-                            name="firstName"
-                            component="input"
-                            type="text"
-                            placeholder="First Name"
-                        />
+                        <Field name="title" component="input" type="text" placeholder="Title" />
                     </div>
                 </div>
                 <div>
-                    <label>Last Name</label>
+                    <label>Author</label>
                     <div>
-                        <Field
-                            name="lastName"
-                            component="input"
-                            type="text"
-                            placeholder="Last Name"
-                        />
+                        <Field name="author" component="input" type="text" placeholder="Title" />
                     </div>
                 </div>
+
                 <div>
-                    <label>Email</label>
+                    <label>Categories</label>
                     <div>
-                        <Field
-                            name="email"
-                            component="input"
-                            type="email"
-                            placeholder="Email"
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label>Sex</label>
-                    <div>
-                        <label>
-                            <Field
-                                name="sex"
-                                component="input"
-                                type="radio"
-                                value="male"
-                            />{' '}
-                            Male
-                </label>
-                        <label>
-                            <Field
-                                name="sex"
-                                component="input"
-                                type="radio"
-                                value="female"
-                            />{' '}
-                            Female
-                </label>
-                    </div>
-                </div>
-                <div>
-                    <label>Favorite Color</label>
-                    <div>
-                        <Field name="favoriteColor" component="select">
-                            <option />
-                            <option value="ff0000">Red</option>
-                            <option value="00ff00">Green</option>
-                            <option value="0000ff">Blue</option>
+                        <Field name="category" component="select">
+                            <option value="">Select a category...</option>
+                            {this.props.categories.map((c, idx) => (
+                                <option value={c.path} key={idx}>
+                                    {c.name}
+                                </option>
+                            ))}
                         </Field>
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="employed">Employed</label>
-                    <div>
-                        <Field
-                            name="employed"
-                            id="employed"
-                            component="input"
-                            type="checkbox"
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label>Notes</label>
-                    <div>
-                        <Field name="notes" component="textarea" />
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" disabled={pristine || submitting}>
-                        Submit
-                </button>
-                    <button type="button" disabled={pristine || submitting} onClick={reset}>
-                        Clear Values
-                </button>
+                    <button type="submit" disabled={submitting}>
+                            Submit
+                    </button>
+                        <button type="button" disabled={submitting} onClick={reset}>
+                            Clear Values
+                    </button>
                 </div>
             </form>
         )
     }
 }
 
-const mapStateToProps = state => ({ post: state.postReducer.post })
-const mapDispatchToProps = { add }
-export default reduxForm(connect(mapStateToProps, mapDispatchToProps))(PostForm)
+const validate = values => {
+    const errors = {}
+    if (!values.title) {
+        errors.title = 'Title required'
+    }
+    if (!values.body) {
+        errors.body = 'Body required'
+    }
+    if (!values.author) {
+        errors.author = 'Author required'
+    }
+    if (!values.category) {
+        errors.category = 'Category required'
+    }
+    return errors
+}
+
+PostForm = reduxForm({ form: 'postForm', validate })(PostForm)
+
+const mapStateToProps = state => ({ post: state.postReducer.post,categories: state.categoriesReducer.categories })
+const mapDispatchToProps = { add, getAllCategories }
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
