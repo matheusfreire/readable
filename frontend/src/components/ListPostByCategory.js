@@ -5,8 +5,12 @@ import {getByCategory} from '../actions/post'
 
 class ListPostByCategory extends Component {
 
-    componentDidMount() {
-        console.log(this.props.match.params.category)
+
+    componentDidMount(){
+        this.props.getByCategory(this.props.match.params.category)
+    }
+
+    componentWillMount(){
         this.props.getByCategory(this.props.match.params.category)
     }
 

@@ -17,7 +17,6 @@ class PostForm extends Component {
     }
 
     submit = (values) => {
-        console.log(values)
         const uuidv4 = require('uuid/v4');
         this.props.add({id: uuidv4(),timestamp: Date.now(),title: values.title, body: values.body, author: values.author, category:values.category}).then(() => {
             this.setState({redirectToHome: true})
