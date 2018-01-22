@@ -10,5 +10,6 @@ export const POST_CREATED = 'POST_CREATED';
 export const GET_COMMENTS_POST = 'GET_COMMENTS_POST';
 export const COMMENT_VOTED = 'COMMENT_VOTED';
 export const GET_COMMENT = 'GET_COMMENT';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 
