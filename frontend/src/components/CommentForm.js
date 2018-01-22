@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Redirect } from 'react-router'
 import { add } from '../actions/comments';
 
-class PostForm extends Component {
+class CommentForm extends Component {
 
     state = {
         showButton: true,
@@ -19,14 +19,14 @@ class PostForm extends Component {
     }
 
     
-    clickOpenForm = () =>{
+    clickOpenForm (){
         this.setState({showButton: false})
     }
     
     render() {
         if (this.state.redirectToHome) {
             return (
-                <button onClick={() => clickOpenForm}></button>
+                <button onClick={clickOpenForm}></button>
             )
         } else {
             const { handleSubmit, reset, submitting } = this.props
