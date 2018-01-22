@@ -78,8 +78,8 @@ const validate = values => {
     return errors
 }
 
-PostForm = reduxForm({ form: 'postForm', validate })(PostForm)
+CommentForm = reduxForm({ form: 'commentForm', validate })(CommentForm)
 
-const mapStateToProps = state => ({ post: state.postReducer.post, categories: state.categoriesReducer.categories })
-const mapDispatchToProps = { add, getAllCategories }
-export default connect(mapStateToProps, mapDispatchToProps)(PostForm)
+const mapStateToProps = state => ({ comment: state.commentReducer.comment })
+const mapDispatchToProps = { add }
+export default connect(mapStateToProps, mapDispatchToProps)(CommentForm)
