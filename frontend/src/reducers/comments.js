@@ -1,4 +1,4 @@
-import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT, ADD_COMMENT} from "../utils/ActionTypes";
+import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT, ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL} from "../utils/ActionTypes";
 
 
 const INITIAL_STATE = {
@@ -22,7 +22,11 @@ export default (state = INITIAL_STATE, action) => {
         case GET_COMMENT:
             return { ...state, comment: action.comment }
         case ADD_COMMENT:
-            return {...state, comments: action.comments.push(action.comment) }
+            return {...state, comments: [...state.comments,action.comment], commentModalOpen: false}
+        case OPEN_MODAL:
+            return {...state, commentModalOpen: true}
+        case CLOSE_MODAL:
+            return {...state, commentModalOpen: true}
         default:
             return state
     }

@@ -3,6 +3,8 @@ import Loading from 'react-loading';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
+import { connect } from 'react-redux'
+import { openModal, closeModal} from '../actions/comments'
 
 class CommentModal extends Component {
 
@@ -12,22 +14,20 @@ class CommentModal extends Component {
 
 
     openModal = () => {
-        this.props.commentModalOpen({ commentModalOpen: true })
+        this.props.openModal()
     }
 
     closeModal = () => {
-        this.setState({ commentModalOpen: false })
+        this.props.closeModal()
     }
 
-
     render() {
-        const { submitting, reset } = this.props
-        const { commentModalOpen } = this.state
+        const { submitting, reset, commentModalOpen } = this.props
         if (commentModalOpen) {
             return (
                 <Modal className='modal' overlayClassName='overlay'
                     isOpen={commentModalOpen}
-                    onRequestClose={this.closeModal}
+                    onRequestClose={this.closeModal()}
                     contentLabel='Modal'>
                     <CommentForm parentId={this.props.parentId} closeModal={this.closeModal()}/>
                 </Modal>
@@ -42,4 +42,6 @@ class CommentModal extends Component {
     }
 }
 
-export default(CommentModal)
+const mapStateToProps = state => ({commentModalOpen: state.commentReducer.commentModalOpen})
+const mapDispatchToProps = { openModal, closeModal}
+export default connect(mapStateToProps, mapDispatchToProps)(CommentModal)

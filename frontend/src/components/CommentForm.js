@@ -12,9 +12,7 @@ class CommentForm extends Component {
 
     submit = (values) => {
         const uuidv4 = require('uuid/v4');
-        this.props.add({ id: uuidv4(), timestamp: Date.now(), title: values.title, author: values.author, parentId: this.props.parentId }).then(() => {
-            this.props.closeModal();
-        })
+        this.props.create({ id: uuidv4(), timestamp: Date.now(), title: values.title,body:values.body,author: values.author, parentId: this.props.parentId })
     }
 
     render() {
