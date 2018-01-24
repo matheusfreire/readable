@@ -1,68 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { Redirect } from 'react-router'
-import { add } from '../actions/comments';
+import { create } from '../actions/comments';
+import PropTypes from 'prop-types'
 
 class CommentForm extends Component {
 
-    state = {
-        showButton: true,
-        showFormComplete: false
+    static propTypes = {
+        parentId: PropTypes.string.isRequired,
     }
 
     submit = (values) => {
         const uuidv4 = require('uuid/v4');
         this.props.add({ id: uuidv4(), timestamp: Date.now(), title: values.title, author: values.author, parentId: this.props.parentId }).then(() => {
-            this.setState({ showFormComplete: false, showButton: true })
+            this.props.closeModal();
         })
     }
 
-    
-    clickOpenForm (){
-        this.setState({showButton: false})
-    }
-    
     render() {
-        if (this.state.redirectToHome) {
-            return (
-                <button onClick={clickOpenForm}></button>
-            )
-        } else {
-            const { handleSubmit, reset, submitting } = this.props
-            return (
-                <form onSubmit={handleSubmit(this.submit)}>
+        const { handleSubmit,submitting, reset } = this.props
+        return (
+            <form onSubmit={handleSubmit(this.submit)}>
+                <div>
+                    <label>Title</label>
                     <div>
-                        <label>Title</label>
-                        <div>
-                            <Field name="title" component="input" type="text" placeholder="Title" />
-                        </div>
+                        <Field name="title" component="input" type="text" placeholder="Title" />
                     </div>
+                </div>
+                <div>
+                    <label>Author</label>
                     <div>
-                        <label>Author</label>
-                        <div>
-                            <Field name="author" component="input" type="text" placeholder="Title" />
-                        </div>
+                        <Field name="author" component="input" type="text" placeholder="Title" />
                     </div>
+                </div>
 
+                <div>
+                    <label>Body</label>
                     <div>
-                        <label>Body</label>
-                        <div>
-                            <Field name="body" component="input" type="textarea" placeholder="Body" />
-                        </div>
+                        <Field name="body" component="input" type="textarea" placeholder="Body" />
                     </div>
+                </div>
 
-                    <div>
-                        <button type="submit" disabled={submitting}>
-                            Submit
-                        </button>
-                        <button type="button" disabled={submitting} onClick={reset}>
-                            Clear Values
-                        </button>
-                    </div>
-                </form>
-            )
-        }
+                <div>
+                    <button type="submit" disabled={submitting}>
+                        Submit
+                            </button>
+                    <button type="button" disabled={submitting} onClick={reset}>
+                        Clear Values
+                            </button>
+                </div>
+            </form>
+        )
     }
 }
 
@@ -81,5 +69,5 @@ const validate = values => {
 CommentForm = reduxForm({ form: 'commentForm', validate })(CommentForm)
 
 const mapStateToProps = state => ({ comment: state.commentReducer.comment })
-const mapDispatchToProps = { add }
+const mapDispatchToProps = { create }
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm)

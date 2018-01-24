@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { get, vote} from '../actions/post'
 import ListComments from './ListComments';
-import CommentForm from './CommentForm';
+import CommentModal from './CommentModal';
 
 class PostShow extends Component {
 
@@ -30,13 +30,15 @@ class PostShow extends Component {
                     <span>Carregando</span>
                 ):( 
                     <div>
-                        <h1>POST SHOW - {post.category}</h1>
+                        <div>
+                            <h1>POST SHOW - {post.category}</h1>
+                        </div>
                         {post.body}
                         <hr />
                         Score: {post.voteScore}
                         <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
                         <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
-                        <CommentForm parentId={post.id}/>
+                        <CommentModal parentId={post.id}/>
                         <ListComments postId={post.id} />
                     </div>
                 )}
