@@ -6,6 +6,7 @@ import {ConnectedRouter, routerMiddleware, routerReducer} from 'react-router-red
 import createHistory from 'history/createBrowserHistory'
 
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import thunk from 'redux-thunk'
 import multi from 'redux-multi'
@@ -16,6 +17,7 @@ import post from './reducers/posts'
 import categories from './reducers/categories'
 import comments from './reducers/comments'
 import { reducer as formReducer } from 'redux-form'
+
 
 const history = createHistory()
 
@@ -40,7 +42,9 @@ const ConnectedSwitch = connect(state => ({
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <App />
+            <MuiThemeProvider>
+                <App />
+            </MuiThemeProvider>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('root'),
