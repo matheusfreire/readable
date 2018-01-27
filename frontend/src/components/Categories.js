@@ -9,6 +9,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import {withRouter} from 'react-router-dom';
 
 const styles = {
     headline: {
@@ -27,7 +28,7 @@ class Categories extends Component {
 
     handleClick = (event, value) =>{
         let link = `/${value}/posts`;
-        window.location.assign(link);
+        this.props.history.push(link);
     }
     render() {
         const {categories} = this.props
@@ -46,4 +47,4 @@ class Categories extends Component {
 
 const mapStateToProps = state => ({categories: state.categoriesReducer.categories})
 const mapDispatchToProps = { getAllCategories}
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Categories))

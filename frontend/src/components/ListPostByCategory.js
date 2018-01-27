@@ -10,7 +10,7 @@ class ListPostByCategory extends Component {
         this.props.getByCategory(this.props.match.params.category)
     }
 
-    componentWillMount(){
+    componentWillUpdate(){
         this.props.getByCategory(this.props.match.params.category)
     }
 
@@ -21,10 +21,10 @@ class ListPostByCategory extends Component {
                 <h1>Home Posts</h1>
                 {
                     list.map((post) => (
-                        <div>
+                        <div key={post.id}>
                             {post.body}
                             <br />
-                            <Link to={`/posts/${post.id}`}>Show</Link>
+                            <Link key={post.id} to={`/posts/${post.id}`}>Show</Link>
                             <br />
                             <hr />
                         </div>
