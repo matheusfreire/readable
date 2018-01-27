@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import ReactLoading from 'react-loading';
-import {Link} from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import {getAllCategories} from '../actions/categories';
 
@@ -10,15 +7,6 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {withRouter} from 'react-router-dom';
-
-const styles = {
-    headline: {
-        fontSize: 24,
-        paddingTop: 16,
-        marginBottom: 12,
-        fontWeight: 400,
-    },
-};
 
 class Categories extends Component {
 

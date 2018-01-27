@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { search } from "../actions/post";
 import { Link } from 'react-router-dom'
+import CardPost from './CardPost';
 
 class Home extends Component {
 
@@ -13,19 +14,9 @@ class Home extends Component {
         const { list } = this.props
         return (
             <div>
-                <h1>Home Posts</h1>
-                {
-                    list.map((post) => (
-                        <div key={post.id}>
-                            {post.body}
-                            <br />
-                            <Link key={post.id} to={`/posts/${post.id}`}>Show</Link>
-                            <br />
-                            <hr />
-                        </div>
-                    ))
-                }
-
+                {list.map((post) => (
+                    <CardPost key={post.id} post={post}/>
+                ))}
             </div>
         );
     }
