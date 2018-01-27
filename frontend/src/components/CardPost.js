@@ -8,14 +8,14 @@ function CardPost(props) {
 
     const handleClick = (postId) => {
         let link = `/posts/${postId}`;
-        this.props.history.push(link);
+        props.history.push(link);
     }
     return (<Card>
         <CardHeader title={props.post.title} subtitle={props.post.author}
             actAsExpander={true}
             showExpandableButton={true}/>
         <CardActions>
-            <FlatButton label="Show comments" />
+            <FlatButton label="Show comments" onClick={() =>{handleClick(props.post.id)}} />
         </CardActions>
         <CardText expandable={true}>
             {props.post.body}
