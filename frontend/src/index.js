@@ -8,15 +8,16 @@ import createHistory from 'history/createBrowserHistory'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import thunk from 'redux-thunk'
-import multi from 'redux-multi'
-import {Switch} from 'react-router'
+import thunk from 'redux-thunk';
+import multi from 'redux-multi';
+import {Switch} from 'react-router';
 
-import App from './App'
-import post from './reducers/posts'
-import categories from './reducers/categories'
-import comments from './reducers/comments'
-import { reducer as formReducer } from 'redux-form'
+import App from './App';
+import post from './reducers/posts';
+import categories from './reducers/categories';
+import comments from './reducers/comments';
+import sidemenu from './reducers/sidemenu'
+import { reducer as formReducer } from 'redux-form';
 
 
 const history = createHistory()
@@ -30,7 +31,8 @@ const store = createStore(
         postReducer: post,
         categoriesReducer: categories,
         commentReducer: comments,
-        form: formReducer
+        form: formReducer,
+        sideMenuReducer: sidemenu
     }),
     composeWithDevTools(applyMiddleware(...middlewares)),
 )

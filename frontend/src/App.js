@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
-import { Route, Switch,withRouter } from 'react-router'
+import { Route, Switch,withRouter } from 'react-router';
+import {open} from './actions/sidemenu';
 
 import Home from "./components/Home";
 import PostForm from "./components/PostForm";
@@ -11,6 +13,7 @@ import ListPostByCategory from './components/ListPostByCategory';
 import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import SideMenu from './components/SideMenu';
 
 
 class App extends Component {
@@ -19,15 +22,21 @@ class App extends Component {
         this.props.history.push('/posts/new');
     }
 
+    openDrawer = () => {
+        this.props.open()
+    }
+
     render() {
         let currentPath = window.location.pathname;
         return (
             <div className="App">
 
-                <AppBar title="Readable" iconClassNameRight="muidocs-icon-navigation-expand-more">
+                <AppBar title="Readable" iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    onLeftIconButtonClick={() => {this.openDrawer()}}>
                     <Categories />
                 </AppBar>
                
+                <SideMenu />
                 <Switch>
                     <Route exact path="/" component={Home} />
                     {/* <Route path="/about" component={() => (<h1>About TETEU</h1>)} /> */}
@@ -45,4 +54,6 @@ class App extends Component {
     }
 }
 
-export default withRouter(App);
+const mapStateToProps = state => ({ open: state.sideMenuReducer.open })
+const mapDispatchToProps = { open }
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

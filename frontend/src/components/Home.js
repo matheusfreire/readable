@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { search } from "../actions/post";
-import { Link } from 'react-router-dom'
 import CardPost from './CardPost';
 
 class Home extends Component {
