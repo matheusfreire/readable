@@ -17,7 +17,7 @@ class SideMenu extends Component {
 
     render() {
         return (
-            <div>
+            <div className="center">
                 <Drawer open={this.props.open}>
                     <MenuItem>New post</MenuItem>
                     <MenuItem>Topics

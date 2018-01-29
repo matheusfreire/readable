@@ -10,17 +10,22 @@ function CardPost(props) {
         let link = `/posts/${postId}`;
         props.history.push(link);
     }
-    return (<Card>
-        <CardHeader title={props.post.title} subtitle={props.post.author}
-            actAsExpander={true}
-            showExpandableButton={true}/>
-        <CardActions>
-            <FlatButton label="Show comments" onClick={() =>{handleClick(props.post.id)}} />
-        </CardActions>
-        <CardText expandable={true}>
-            {props.post.body}
-        </CardText>
-    </Card>)
+    return (
+        <div>
+            <Card>
+                <CardHeader title={props.post.title} subtitle={props.post.author}
+                    actAsExpander={true}
+                    showExpandableButton={true}/>
+                <CardActions>
+                    <FlatButton label="Show comments" onClick={() =>{handleClick(props.post.id)}} />
+                </CardActions>
+                <CardText expandable={true}>
+                    {props.post.body}
+                </CardText>
+            </Card>
+            <br />
+        </div>
+    )
 }
 
 export default withRouter(CardPost);

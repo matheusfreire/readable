@@ -72,7 +72,7 @@ class PostForm extends Component {
         } else {
             const { handleSubmit, reset, submitting } = this.props
             return (
-                <form onSubmit={handleSubmit(this.submit)}>
+                <form onSubmit={handleSubmit(this.submit)} className="center">
                     <div>
                         <Field name="title" component={renderTextField} label="Title"/>
                     </div>
@@ -93,7 +93,7 @@ class PostForm extends Component {
                     </div>
                     <div>
                         <RaisedButton label="Submit" style={style} type="submit"/>
-                        <RaisedButton label="Submit" style={style} type="button" onClick={reset}/>
+                        <RaisedButton label="Clear values" style={style} type="button" onClick={() => {reset}}/>
                         
                     </div>
                 </form>
