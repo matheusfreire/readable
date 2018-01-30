@@ -3,6 +3,16 @@ import { connect } from 'react-redux';
 import { get, vote} from '../actions/post'
 import ListComments from './ListComments';
 import CommentModal from './CommentModal';
+import Paper from 'material-ui/Paper';
+import Tag from './Tag';
+import Divider from 'material-ui/Divider';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import ImageTagFaces from 'material-ui/svg-icons/image/tag-faces';
+import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import {red500, yellow500, blue500} from 'material-ui/styles/colors';
 
 class PostShow extends Component {
 
@@ -30,14 +40,32 @@ class PostShow extends Component {
                     <span>Carregando</span>
                 ):( 
                     <div>
+                        <Paper zDepth={2} />
                         <div>
-                            <h1>POST SHOW - {post.category}</h1>
+                            <h1>Post: {post.title} -  By {post.author} 
+                                <div className="right">
+                                    <Tag category={post.category}/>
+                                </div>
+                            </h1>
+                            
                         </div>
-                        {post.body}
-                        <hr />
-                        Score: {post.voteScore}
-                        <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
-                        <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
+                        <div>
+                            {post.body}
+                            <div className="right">
+                                <Badge badgeContent={post.voteScore} primary={post.voteScore > 0} secondary={post.voteScore <= 0} badgeStyle={{top: 12, right: 12}}>
+                                    <IconButton tooltip="Score">
+                                        {post.voteScore > 0 ?
+                                            <ActionThumbUp color={blue500}/>
+                                        : <ActionThumbDown color={red500}/> 
+                                        }
+                                    </IconButton>
+                                </Badge>
+                            </div>
+                            <br />
+                            <button onClick={() => this.handleClick(post, 'upVote')}>UP</button>
+                            <button onClick={() => this.handleClick(post, 'downVote')}>DOWN</button>
+                        </div>
+                        <Divider />
                         <CommentModal parentId={post.id}/>
                         <ListComments postId={post.id} />
                     </div>
