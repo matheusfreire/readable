@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {getAllCategories} from '../actions/categories';
+import {withRouter} from 'react-router-dom';
 
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import {withRouter} from 'react-router-dom';
 
 class Categories extends Component {
 

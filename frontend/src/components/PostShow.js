@@ -8,7 +8,6 @@ import Tag from './Tag';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import { blue500 } from 'material-ui/styles/colors';
 import FontIcon from 'material-ui/FontIcon';
-import Badge from 'material-ui/Badge';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
 import { Container, Row, Col } from 'reactstrap';
 
