@@ -3,10 +3,27 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import Drawer from 'material-ui/Drawer';
+import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import AvPlaylistAdd from 'material-ui/svg-icons/av/playlist-add';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import { close } from '../actions/sidemenu';
 import {getAllCategories} from '../actions/categories';
+import FontAwesome from 'react-fontawesome'
+
+const style = {
+    paper: {
+      display: 'inline-block',
+      float: 'left',
+      margin: '16px 32px 16px 0',
+    },
+    rightIcon: {
+      textAlign: 'center',
+      lineHeight: '24px',
+    },
+  };
 
 class SideMenu extends Component {
 
@@ -25,6 +42,10 @@ class SideMenu extends Component {
                 return this.props.history.push('/');
             case 'newPost':
                 return this.props.history.push('/posts/new');
+            case 'react':
+            case 'udacity':
+            case 'redux':
+                return this.props.history.push(`/${action}/posts`)
             default:
                 return this.props.history.push('/');
         }
@@ -32,16 +53,23 @@ class SideMenu extends Component {
 
     render() {
         return (
-            <div className="center">
+            <div style={style}>
                 <Drawer open={this.props.open}>
-                    <MenuItem onClick={() => {this.handleClick('home')}}>Home</MenuItem>
-                    <MenuItem onClick={() => {this.handleClick('newPost')}}>New post</MenuItem>
-                    <MenuItem>Topics
-                        {this.props.categories.map((category) => (
-                            <MenuItem key={category.path} value={category.path} primaryText={category.name} />
-                        ))}
-                    </MenuItem>
-                    <MenuItem onClick={() => this.close()}>Close menu</MenuItem>
+                    <Menu>
+                        <MenuItem onClick={() => {this.handleClick('home')}} leftIcon={<ActionHome />} primaryText="Home"/>
+                    </Menu>
+                    <Menu>
+                        <MenuItem onClick={() => {this.handleClick('newPost')}} leftIcon={<AvPlaylistAdd />} primaryText="New post"/>
+                        <Menu primarytext="Topics">
+                            {this.props.categories.map((category) => (
+                                <MenuItem leftIcon={<FontAwesome className="super-crazy-colors" name="fire"/>} 
+                                  key={category.path} value={category.path} primaryText={category.name} onClick={() => {this.handleClick(category.path)}} />
+                            ))}
+                        </Menu>
+                    </Menu>
+                    <Menu>
+                        <MenuItem onClick={() => this.close()} leftIcon={<NavigationClose />} primaryText="Close menu"/>
+                    </Menu>
                 </Drawer>
 
 

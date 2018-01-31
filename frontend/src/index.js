@@ -21,7 +21,6 @@ import { reducer as formReducer } from 'redux-form';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-
 const history = createHistory()
 
 const routerMiddlewareHistory = routerMiddleware(history)

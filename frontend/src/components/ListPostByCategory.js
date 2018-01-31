@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {getByCategory} from '../actions/post'
 import CardPost from './CardPost';
+import { Container } from 'reactstrap';
 
 class ListPostByCategory extends Component {
 
@@ -17,11 +18,11 @@ class ListPostByCategory extends Component {
     render() {
         const { list } = this.props
         return (
-            <div>
+            <Container>
                 {list.map((post) => (
                     <CardPost key={post.id} post={post}/>
                 ))}
-            </div>
+            </Container>
         );
     }
 }
