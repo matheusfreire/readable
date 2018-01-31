@@ -61,6 +61,10 @@ class PostForm extends Component {
             this.setState({redirectToHome: true})
         })
     }
+
+    reset = () => {
+        
+    }
     
     
     render() {
@@ -70,7 +74,7 @@ class PostForm extends Component {
             <Redirect to="/"/>
             )
         } else {
-            const { handleSubmit, reset, submitting } = this.props
+            const { handleSubmit} = this.props
             return (
                 <form onSubmit={handleSubmit(this.submit)} className="center">
                     <div>
@@ -93,7 +97,7 @@ class PostForm extends Component {
                     </div>
                     <div>
                         <RaisedButton label="Submit" style={style} type="submit"/>
-                        <RaisedButton label="Clear values" style={style} type="button" onClick={() => {reset}}/>
+                        <RaisedButton label="Clear values" style={style} type="button" onClick={() => {this.reset}}/>
                         
                     </div>
                 </form>

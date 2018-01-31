@@ -38,4 +38,9 @@
   bottom: 20px;
   left: auto;
   position: fixed;
-};
+}
+
+.center-horizontal{
+  position: inherit !important;
+  top: 50%;
+}

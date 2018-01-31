@@ -19,6 +19,8 @@ import comments from './reducers/comments';
 import sidemenu from './reducers/sidemenu'
 import { reducer as formReducer } from 'redux-form';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const history = createHistory()
 
