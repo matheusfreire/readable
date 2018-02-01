@@ -11,13 +11,6 @@ import FontIcon from 'material-ui/FontIcon';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
 import { Container, Row, Col } from 'reactstrap';
 
-const iconStyles = {
-    marginRight: 10,
-};
-
-const marginLeft = {
-    marginLeft: 10,
-}
 
 class PostShow extends Component {
 
@@ -52,14 +45,14 @@ class PostShow extends Component {
                                     <Tag category={post.category} />
                                     <Row>
                                         <Col sm="4" >
-                                            <FontIcon className="material-icons" style={iconStyles} color={blue500}
+                                            <FontIcon className="material-icons icon-right" color={blue500}
                                                 onClick={() => this.handleClick(post, 'upVote')}>
                                                 thumb_up
                                             </FontIcon>
                                             <span>
                                                 {post.voteScore}
                                             </span>
-                                            <FontIcon className="material-icons" style={marginLeft}
+                                            <FontIcon className="material-icons icon-left"
                                                 onClick={() => this.handleClick(post, 'downVote')}>
                                                 thumb_down
                                             </FontIcon>

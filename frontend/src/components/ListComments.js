@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+
 import { getByPost, vote} from '../actions/comments'
+
 import CommentShow from './CommentShow';
+
+import Divider from 'material-ui/Divider';
 
 class ListComments extends Component {
 
@@ -29,11 +33,14 @@ class ListComments extends Component {
                     <div>
                         {comments &&(
                             <div>
-                                <h1>Comments SHOW</h1>
-                                    {comments.map((comment) => (
+                                <Divider />
+                                {comments.map((comment) => (
+                                    <div>
                                         <CommentShow key={comment.id} comment={comment} />
-                                    ))}
-                                <hr />
+                                        <Divider />
+                                        <br />
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </div>

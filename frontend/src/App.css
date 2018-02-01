@@ -44,3 +44,17 @@
   position: inherit !important;
   top: 50%;
 }
+
+.icon-right{
+  margin-right: 10,
+}
+
+.icon-left{
+  margin-left: 10
+}
+
+.text-shadow{
+  opacity: 0.6; /* Real browsers */
+  filter: alpha(opacity = 60); /* MSIE */
+  left: 25%
+}
