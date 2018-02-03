@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import Loading from 'react-loading';
-import Modal from 'react-modal';
-import PropTypes from 'prop-types'
-import CommentForm from './CommentForm'
-import { connect } from 'react-redux'
-import { openModal, closeModal} from '../actions/comments'
+import PropTypes from 'prop-types';
+
+import CommentForm from './CommentForm';
+
+import { connect } from 'react-redux';
+import { openModal, closeModal} from '../actions/comments';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import Dialog from 'material-ui/Dialog';
 
 class CommentModal extends Component {
 
@@ -12,33 +16,29 @@ class CommentModal extends Component {
         parentId: PropTypes.string.isRequired,
     }
 
-
     openModal = () => {
         this.props.openModal()
     }
 
-    closeModal = () => {
-        this.props.closeModal()
-    }
+    
 
     render() {
-        const { submitting, reset, commentModalOpen } = this.props
+        const { commentModalOpen } = this.props
+        
         if (commentModalOpen) {
             return (
-                <Modal className='modal' overlayClassName='overlay'
-                    isOpen={commentModalOpen}
-                    onRequestClose={this.closeModal()}
-                    contentLabel='Modal'>
-                    <CommentForm parentId={this.props.parentId} closeModal={this.closeModal()}/>
-                </Modal>
+                <Dialog title="New comment" modal={true} open={commentModalOpen} autoScrollBodyContent={true}>
+                    <CommentForm parentId={this.props.parentId} />
+                </Dialog>
             )
             
         } else {
             return (
-                <button onClick={() => this.openModal()}>Add new comment</button>
+                <RaisedButton label="New comment" labelPosition="before"
+                    primary={true} onClick={() => this.openModal()}
+                        icon={<ContentAdd />} />
             )
         }
-
     }
 }
 

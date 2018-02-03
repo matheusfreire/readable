@@ -26,7 +26,7 @@ export default (state = INITIAL_STATE, action) => {
         case OPEN_MODAL:
             return {...state, commentModalOpen: true}
         case CLOSE_MODAL:
-            return {...state, commentModalOpen: true}
+            return {...state, commentModalOpen: false}
         default:
             return state
     }

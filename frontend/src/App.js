@@ -16,7 +16,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import SideMenu from './components/SideMenu';
 
 const titleStyle = {
-    'text-align': 'center',
+    'textAlign': 'center',
 }
 
 
