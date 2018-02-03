@@ -49,7 +49,7 @@ class PostShow extends Component {
                                                 onClick={() => this.handleClick(post, 'upVote')}>
                                                 thumb_up
                                             </FontIcon>
-                                            <span>
+                                            <span className="span-style">
                                                 {post.voteScore}
                                             </span>
                                             <FontIcon className="material-icons icon-left"

@@ -15,11 +15,19 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import SideMenu from './components/SideMenu';
 
+const titleStyle = {
+    'text-align': 'center',
+}
+
 
 class App extends Component {
 
     handleClickNewPost = () =>{
         this.props.history.push('/posts/new');
+    }
+
+    goHome= () => {
+        this.props.history.push('/');
     }
 
     openDrawer = () => {
@@ -31,7 +39,7 @@ class App extends Component {
         return (
             <div className="App">
 
-                <AppBar title="Readable" iconClassNameRight="muidocs-icon-navigation-expand-more"
+                <AppBar title="Readable" onTitleClick={() => {this.goHome()}} titleStyle={titleStyle} iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonClick={() => {this.openDrawer()}}>
                     <Categories />
                 </AppBar>

@@ -11,7 +11,9 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 import { close } from '../actions/sidemenu';
 import {getAllCategories} from '../actions/categories';
-import FontAwesome from 'react-fontawesome'
+import FontAwesome from 'react-fontawesome';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
 
 const style = {
     paper: {
@@ -58,6 +60,8 @@ class SideMenu extends Component {
                     <Menu>
                         <MenuItem onClick={() => {this.handleClick('home')}} leftIcon={<ActionHome />} primaryText="Home"/>
                     </Menu>
+                    <Divider />
+                    <Subheader>Topics</Subheader>
                     <Menu>
                         <MenuItem onClick={() => {this.handleClick('newPost')}} leftIcon={<AvPlaylistAdd />} primaryText="New post"/>
                         <Menu primarytext="Topics">
@@ -67,6 +71,7 @@ class SideMenu extends Component {
                             ))}
                         </Menu>
                     </Menu>
+                    <Divider />
                     <Menu>
                         <MenuItem onClick={() => this.close()} leftIcon={<NavigationClose />} primaryText="Close menu"/>
                     </Menu>

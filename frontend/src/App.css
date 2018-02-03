@@ -58,3 +58,7 @@
   filter: alpha(opacity = 60); /* MSIE */
   left: 25%
 }
+.span-style{
+  margin-left: 2%;
+  margin-right: 2%;
+}

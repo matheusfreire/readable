@@ -5,13 +5,8 @@ import { vote} from '../actions/comments';
 import Paper from 'material-ui/Paper';
 import { blue500 } from 'material-ui/styles/colors';
 import FontIcon from 'material-ui/FontIcon';
-import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
-import { Container, Row, Col } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
-
-const iconStyles = {
-    marginRight: 10,
-};
 
 class CommentShow extends Component {
 
@@ -28,7 +23,6 @@ class CommentShow extends Component {
                         <div className="text-shadow" >
                             {comment.author}
                         </div>
-                        <br />
                         {comment.body}
                         <br/>
                         <Row>
@@ -36,7 +30,7 @@ class CommentShow extends Component {
                                 <FontIcon className="material-icons icon-right" color={blue500} onClick={() => this.handleClick(comment, 'upVote')}>
                                     thumb_up
                                 </FontIcon>
-                                <span>
+                                <span className="span-style">
                                     {comment.voteScore}
                                 </span>
                                 <FontIcon className="material-icons icon-left" onClick={() => this.handleClick(comment, 'downVote')}>
