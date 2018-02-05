@@ -49,8 +49,8 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     {/* <Route path="/about" component={() => (<h1>About TETEU</h1>)} /> */}
                     <Route path="/posts/new" component={PostForm} />
-                    <Route path="/posts/:id" component={PostShow} />
-                    <Route path="/:category/posts" component={ListPostByCategory} />
+                    <Route path="/:category/:id" component={PostShow} />
+                    <Route path="/:category" component={ListPostByCategory} />
                 </Switch>
                 {!currentPath.includes(`posts/new`) ? 
                     <FloatingActionButton className="fab" onClick={this.handleClickNewPost}>

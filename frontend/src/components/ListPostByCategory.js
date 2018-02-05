@@ -19,9 +19,13 @@ class ListPostByCategory extends Component {
         const { list } = this.props
         return (
             <Container>
-                {list.map((post) => (
+                {list.length > 0 ? (list.map((post) => (
                     <CardPost key={post.id} post={post}/>
-                ))}
+                ))) : 
+                    <h2>
+                        Nothing to show
+                    </h2>
+                }
             </Container>
         );
     }

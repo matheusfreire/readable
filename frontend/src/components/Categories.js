@@ -15,7 +15,7 @@ class Categories extends Component {
     }
 
     handleClick = (event, value) =>{
-        let link = `/${value}/posts`;
+        let link = `/${value}`;
         this.props.history.push(link);
     }
     render() {

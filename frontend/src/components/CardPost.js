@@ -6,8 +6,8 @@ import {withRouter} from 'react-router-dom';
 
 function CardPost(props) {
 
-    const handleClick = (postId) => {
-        let link = `/posts/${postId}`;
+    const handleClick = (category,postId) => {
+        let link = `/${category}/${postId}`;
         props.history.push(link);
     }
     return (
@@ -17,7 +17,7 @@ function CardPost(props) {
                     actAsExpander={true}
                     showExpandableButton={true}/>
                 <CardActions>
-                    <FlatButton label="Show comments" onClick={() =>{handleClick(props.post.id)}} />
+                    <FlatButton label="Show comments" onClick={() =>{handleClick(props.post.category,props.post.id)}} />
                 </CardActions>
                 <CardText expandable={true}>
                     {props.post.body}

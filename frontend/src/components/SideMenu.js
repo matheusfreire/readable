@@ -47,7 +47,7 @@ class SideMenu extends Component {
             case 'react':
             case 'udacity':
             case 'redux':
-                return this.props.history.push(`/${action}/posts`)
+                return this.props.history.push(`/${action}`)
             default:
                 return this.props.history.push('/');
         }
