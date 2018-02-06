@@ -42,7 +42,7 @@ class CommentForm extends Component {
     }
 
     render() {
-        const { handleSubmit, submitting } = this.props
+        const { handleSubmit } = this.props
         const actions = [
             <FlatButton key="1" label="Cancel" primary={true} onClick={() => this.closeModal()} />,
             <FlatButton key="2" label="Submit" type="submit" primary={true} />

@@ -26,15 +26,15 @@ export const create = (id, timestamp, title, body, author, category) =>
     body: JSON.stringify({ id: id, timestamp: timestamp, title: title, body: body, author: author, category: category})
   }).then(res => res.json())
         
-export const update = (post) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const update = (id, title, body, category) =>
+  fetch(`${api}/posts/${id}`, {
     method: 'PUT',
     headers: {headers},
-    body: JSON.stringify({ title: post.title, body: post.body})
+    body: JSON.stringify({ title: title, body: body, category: category})
   }).then(res => res.json())
 
-export const remove = (post) =>
-  fetch(`${api}/posts/${post.id}`, {
+export const remove = (id) =>
+  fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
     headers: {headers}
   }).then(res => res.json())

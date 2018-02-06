@@ -49,7 +49,8 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     {/* <Route path="/about" component={() => (<h1>About TETEU</h1>)} /> */}
                     <Route path="/posts/new" component={PostForm} />
-                    <Route path="/:category/:id" component={PostShow} />
+                    <Route exact path="/:category/:post_id/edit" component={PostForm} />
+                    <Route exact path="/:category/:post_id" component={PostShow} />
                     <Route path="/:category" component={ListPostByCategory} />
                 </Switch>
                 {!currentPath.includes(`posts/new`) ? 

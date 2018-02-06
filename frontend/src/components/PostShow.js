@@ -20,7 +20,7 @@ class PostShow extends Component {
 
     componentDidMount() {
         if (this.props.match.params.id !== 'undefined') {
-            this.props.get(this.props.match.params.id).then(() => {
+            this.props.get(this.props.match.params.post_id).then(() => {
                 this.setState({ loading: false })
             })
         }

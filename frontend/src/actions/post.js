@@ -1,11 +1,11 @@
 
 import * as PostsApi from '../utils/PostsAPI';
-import { POSTS_LOADED, POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED } from "../utils/ActionTypes";
+import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, POST_LOADED } from "../utils/ActionTypes";
 
 export const get = (postId) => {
     return (dispatch) => {
         return PostsApi.get(postId)
-            .then((objeto) => dispatch({ type: POSTS_LOADED, objetoPost: objeto }))
+            .then((objeto) => dispatch({ type: POST_LOADED, post: objeto }))
     }
 }
 
@@ -32,5 +32,11 @@ export const vote = (post, vote) => {
 export const add = (post) => {
     return (dispatch) => {
         return PostsApi.create(post.id,post.timestamp,post.title,post.body,post.author,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
+    }
+}
+
+export const update = (post) => {
+    return (dispatch) => {
+        return PostsApi.update(post.id,post.title,post.body,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
     }
 }

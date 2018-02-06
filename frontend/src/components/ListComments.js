@@ -35,7 +35,7 @@ class ListComments extends Component {
                             <div>
                                 <Divider />
                                 {comments.map((comment) => (
-                                    <div>
+                                    <div key={comment.id}>
                                         <CommentShow key={comment.id} comment={comment} />
                                         <Divider />
                                         <br />

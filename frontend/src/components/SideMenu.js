@@ -60,10 +60,10 @@ class SideMenu extends Component {
                     <Menu>
                         <MenuItem onClick={() => {this.handleClick('home')}} leftIcon={<ActionHome />} primaryText="Home"/>
                     </Menu>
+                    <MenuItem onClick={() => {this.handleClick('newPost')}} leftIcon={<AvPlaylistAdd />} primaryText="New post"/>
                     <Divider />
                     <Subheader>Topics</Subheader>
                     <Menu>
-                        <MenuItem onClick={() => {this.handleClick('newPost')}} leftIcon={<AvPlaylistAdd />} primaryText="New post"/>
                         <Menu primarytext="Topics">
                             {this.props.categories.map((category) => (
                                 <MenuItem leftIcon={<FontAwesome className="super-crazy-colors" name="fire"/>} 
