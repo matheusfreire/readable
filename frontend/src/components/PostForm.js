@@ -61,18 +61,27 @@ class PostForm extends Component {
         if (this.props.match.params.post_id !== 'undefined') {
             this.props.get(this.props.match.params.post_id).then(() => {
                 this.setState({ loading: false, editPost: true })
+                this.handleInitialize()
             });
         } else {
             this.setState({ loading: false })
         }
         this.props.getAllCategories()
     }
+    
+    handleInitialize(){
+        const initData = {
+            "title": this.props.post.title,
+            "body": this.props.post.body,
+            "author": this.props.post.author,
+            "category": this.props.post.category,
+        };
+        this.props.initialize(initData);
+    }
 
     submit = (values) => {
-        if (this.setState.editPost) {
-            this.props.update({ id: this.props.match.params.post_id, title: values.title, body: values.body, category: values.category }).then(() => {
-                this.setState({ redirectToHome: true })
-            })
+        if (this.state.editPost) {
+            this.props.update({ id: this.props.match.params.post_id, title: values.title, body: values.body, category: values.category })
         } else {
             const uuidv4 = require('uuid/v4');
             this.props.add({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, category: values.category }).then(() => {
@@ -95,7 +104,6 @@ class PostForm extends Component {
             )
         } else {
             const { handleSubmit } = this.props
-            console.log("POST",this.props.post)
             return (
                 <div>
                     {this.state.loading ?

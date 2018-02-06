@@ -29,7 +29,10 @@ export const create = (id, timestamp, title, body, author, category) =>
 export const update = (id, title, body, category) =>
   fetch(`${api}/posts/${id}`, {
     method: 'PUT',
-    headers: {headers},
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify({ title: title, body: body, category: category})
   }).then(res => res.json())
 
