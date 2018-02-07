@@ -20,7 +20,7 @@ export const update = (comment) =>
 export const remove = (comment) =>
   fetch(`${api}/comments/${comment.id}`, {
     method: 'DELETE',
-    headers: {headers}
+    headers: {...headers}
   }).then(res => res.json())
 
 export const vote = (comment, type) => 

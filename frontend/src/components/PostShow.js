@@ -6,6 +6,7 @@ import CommentModal from './CommentModal';
 import Tag from './Tag';
 
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import CircularProgress from 'material-ui/CircularProgress';
 import { blue500 } from 'material-ui/styles/colors';
 import FontIcon from 'material-ui/FontIcon';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
@@ -35,7 +36,7 @@ class PostShow extends Component {
         return (
             <div >
                 {this.state.loading ? (
-                    <span>Carregando</span>
+                    <CircularProgress />
                 ) : (
                         <Container>
                             <Card>

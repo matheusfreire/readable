@@ -20,8 +20,6 @@ class CommentModal extends Component {
         this.props.openModal()
     }
 
-    
-
     render() {
         const { commentModalOpen } = this.props
         

@@ -22,7 +22,7 @@ class ListPostByCategory extends Component {
                 {list.length > 0 ? (list.map((post) => (
                     <CardPost key={post.id} post={post}/>
                 ))) : 
-                    <h2>
+                    <h2 className="center">
                         Nothing to show
                     </h2>
                 }

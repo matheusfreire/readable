@@ -6,6 +6,7 @@ import { getByPost, vote} from '../actions/comments'
 import CommentShow from './CommentShow';
 
 import Divider from 'material-ui/Divider';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class ListComments extends Component {
 
@@ -28,10 +29,10 @@ class ListComments extends Component {
         return (
             <div>
                 {this.state.loading ? (
-                    <span>Carregando</span>
+                    <CircularProgress />
                 ):(
                     <div>
-                        {comments &&(
+                        {comments.length > 0 ?(
                             <div>
                                 <Divider />
                                 {comments.map((comment) => (
@@ -42,7 +43,10 @@ class ListComments extends Component {
                                     </div>
                                 ))}
                             </div>
-                        )}
+                        ) : (
+                            <div>Nothing to show</div>
+                        )
+                        }
                     </div>
                 )}
                 
