@@ -13,8 +13,12 @@ export const getAllByPost = (postId) =>
 export const update = (comment) =>
   fetch(`${api}/comments/${comment.id}`, {
     method: 'PUT',
-    headers: {headers},
-    body: JSON.stringify({comment})
+    headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({body: comment.body,
+        author: comment.author})
   }).then(res => res.json())
 
 export const remove = (comment) =>

@@ -1,5 +1,5 @@
 import * as CommentApi from '../utils/CommentAPI';
-import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT, ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, REMOVE_COMMENT } from '../utils/ActionTypes';
+import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT, ADD_COMMENT, OPEN_MODAL, CLOSE_MODAL, REMOVE_COMMENT, EDIT_COMMENT, UPDATE_COMMENT } from '../utils/ActionTypes';
 
 
 export const getByPost = (postId) => {
@@ -10,7 +10,7 @@ export const getByPost = (postId) => {
 
 export const vote = (comment, vote) => {
     return (dispatch) => {
-        return CommentApi.vote(comment, vote).then((result) => dispatch({ type: COMMENT_VOTED, commentVoted: result }))
+        return CommentApi.vote(comment, vote).then((result) => dispatch({ type: COMMENT_VOTED, comment: result }))
     }
 }
 
@@ -26,10 +26,20 @@ export const create = (comment) => {
     }
 }
 
+export const update = (comment) => {
+    return (dispatch) => {
+        return CommentApi.update(comment).then((comment) => dispatch({type: UPDATE_COMMENT, comment: comment}))
+    }
+}
+
 export const remove = (comment) => {
     return (dispatch) => {
         return CommentApi.remove(comment).then(() => dispatch({type: REMOVE_COMMENT, comment: comment}))
     }
+}
+
+export const editComment = (comment) => {
+    return {type: EDIT_COMMENT, comment: comment}
 }
 
 export const openModal = () => {

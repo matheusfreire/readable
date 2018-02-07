@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { vote, remove} from '../actions/comments';
+import { vote, remove,editComment} from '../actions/comments';
 
 import Paper from 'material-ui/Paper';
 import { blue500 } from 'material-ui/styles/colors';
@@ -11,12 +11,14 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-
-
 class CommentShow extends Component {
 
     handleClick = (comment, type) => {
         this.props.vote(comment, type)
+    }
+
+    editComment = (comment) => {
+        this.props.editComment(comment)
     }
 
     deleteComment = (comment) => {
@@ -70,5 +72,5 @@ class CommentShow extends Component {
     }
 }
 
-const mapDispatchToProps = {vote, remove}
+const mapDispatchToProps = {vote, remove, editComment}
 export default connect(null, mapDispatchToProps)(CommentShow)

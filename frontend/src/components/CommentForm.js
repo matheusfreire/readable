@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { create } from '../actions/comments';
+import { create, update } from '../actions/comments';
 import PropTypes from 'prop-types';
 import {closeModal} from '../actions/comments';
 
@@ -22,11 +22,11 @@ const renderTextField = ({
             {...custom}
         />
     )
-
-
-
 class CommentForm extends Component {
-
+    state = {
+        loading: true,
+        editComment: false
+    }
 
     static propTypes = {
         parentId: PropTypes.string.isRequired,
@@ -37,8 +37,30 @@ class CommentForm extends Component {
     }
 
     submit = (values) => {
-        const uuidv4 = require('uuid/v4');
-        this.props.create({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, parentId: this.props.parentId })
+        if(this.state.editComment){
+            this.props.update({ id:this.props.comment.id,body: values.body, author: values.author}).then(() => {
+                this.closeModal();
+            })
+        } else {
+            const uuidv4 = require('uuid/v4');
+            this.props.create({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, parentId: this.props.parentId })
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.comment !== 'undefined'){
+            this.setState({editComment:true})
+            this.handleInitialize()
+        }
+    }
+
+    handleInitialize(){
+        const initData = {
+            "title": this.props.comment.title,
+            "body": this.props.comment.body,
+            "author": this.props.comment.author,
+        };
+        this.props.initialize(initData);
     }
 
     render() {
@@ -49,9 +71,6 @@ class CommentForm extends Component {
         ];
         return (
             <form onSubmit={handleSubmit(this.submit)} className="center">
-                <div>
-                    <Field name="title" component={renderTextField} label="Title" />
-                </div>
                 <div>
                     <Field name="author" component={renderTextField} label="Author" />
                 </div>
@@ -85,5 +104,5 @@ const validate = values => {
 CommentForm = reduxForm({ form: 'commentForm', validate })(CommentForm)
 
 const mapStateToProps = state => ({ comment: state.commentReducer.comment })
-const mapDispatchToProps = { create,closeModal }
+const mapDispatchToProps = { create,closeModal, update }
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm)
