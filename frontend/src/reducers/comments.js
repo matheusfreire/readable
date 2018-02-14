@@ -4,7 +4,8 @@ import { GET_COMMENTS_POST, COMMENT_VOTED, GET_COMMENT, ADD_COMMENT, OPEN_MODAL,
 const INITIAL_STATE = {
     comment: {},
     comments: [],
-    commentModalOpen: false
+    commentModalOpen: false,
+    messageComment: {}
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,13 +20,13 @@ export default (state = INITIAL_STATE, action) => {
                 }
                 return c
             })
-            return { ...state, comments: newComments }
+            return { ...state, comments: newComments, messageComment: action.message}
         case EDIT_COMMENT:
             return {...state, comment: action.comment, commentModalOpen: true}
         case GET_COMMENT:
             return { ...state, comment: action.comment }
         case ADD_COMMENT:
-            return {...state, comments: [...state.comments,action.comment], commentModalOpen: false}
+            return {...state, comments: [...state.comments,action.comment], commentModalOpen: false, messageComment: action.message}
         case REMOVE_COMMENT:
             return {...state, comments: state.comments.filter((c) => c.id !== action.comment.id)}
         case OPEN_MODAL:

@@ -11,6 +11,7 @@ import { blue500 } from 'material-ui/styles/colors';
 import FontIcon from 'material-ui/FontIcon';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
 import { Container, Row, Col } from 'reactstrap';
+import Snackbar from 'material-ui/Snackbar';
 
 
 class PostShow extends Component {
@@ -32,9 +33,10 @@ class PostShow extends Component {
     }
 
     render() {
-        const post = this.props.objeto
+        const {post, message} = this.props
         return (
             <div >
+                
                 {this.state.loading ? (
                     <CircularProgress />
                 ) : (
@@ -72,13 +74,19 @@ class PostShow extends Component {
                                     <ListComments postId={post.id} />
                                 </CardText>
                             </Card>
+                            <Snackbar
+                                open={message !== ''}
+                                message={message}
+                                autoHideDuration={4000}
+                            />
                         </Container>
+                        
                     )}
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({ objeto: state.postReducer.post })
+const mapStateToProps = state => ({ post: state.postReducer.post, message: state.postReducer.messagePost })
 const mapDispatchToProps = { get, vote }
 export default connect(mapStateToProps, mapDispatchToProps)(PostShow)

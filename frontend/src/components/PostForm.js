@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { add, update, get } from '../actions/post';
 import { Field, reduxForm } from 'redux-form';
+import { push } from 'react-router-redux';
 import { getAllCategories } from '../actions/categories';
 import { Redirect } from 'react-router';
 
@@ -58,7 +59,7 @@ class PostForm extends Component {
     }
 
     componentWillMount() {
-        if (this.props.match.params.post_id !== 'undefined') {
+        if (this.props.match.params.post_id !== undefined) {
             this.props.get(this.props.match.params.post_id).then(() => {
                 this.setState({ loading: false, editPost: true })
                 this.handleInitialize()
@@ -84,8 +85,8 @@ class PostForm extends Component {
             this.props.update({ id: this.props.match.params.post_id, title: values.title, body: values.body, category: values.category })
         } else {
             const uuidv4 = require('uuid/v4');
-            this.props.add({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, category: values.category }).then(() => {
-                this.setState({ redirectToHome: true })
+            this.props.add({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, category: values.category }).then((post) => {
+                push(`/${post.category}/${post.id}`)
             })
 
         }

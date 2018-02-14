@@ -1,7 +1,7 @@
 import { OPEN_SIDE_MENU, CLOSE_SIDE_MENU } from "../utils/ActionTypes";
 
 const INITIAL_STATE = {
-    open: true
+    open: false
 }
 
 
