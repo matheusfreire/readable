@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case GET_COMMENTS_POST:
-            return { ...state, comments: action.comments}
+            return { ...state, comments: action.comments, messageComment: action.message}
         case UPDATE_COMMENT:
         case COMMENT_VOTED:
             let newComments = state.comments.map((c) => {
@@ -24,15 +24,15 @@ export default (state = INITIAL_STATE, action) => {
         case EDIT_COMMENT:
             return {...state, comment: action.comment, commentModalOpen: true}
         case GET_COMMENT:
-            return { ...state, comment: action.comment }
+            return { ...state, comment: action.comment, messageComment: action.message }
         case ADD_COMMENT:
             return {...state, comments: [...state.comments,action.comment], commentModalOpen: false, messageComment: action.message}
         case REMOVE_COMMENT:
-            return {...state, comments: state.comments.filter((c) => c.id !== action.comment.id)}
+            return {...state, comments: state.comments.filter((c) => c.id !== action.comment.id), messageComment: action.message}
         case OPEN_MODAL:
-            return {...state, commentModalOpen: true}
+            return {...state, commentModalOpen: true, messageComment: action.message}
         case CLOSE_MODAL:
-            return {...state, commentModalOpen: false}
+            return {...state, commentModalOpen: false, messageComment: action.message}
         default:
             return state
     }

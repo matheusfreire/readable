@@ -24,7 +24,6 @@ class CommentModal extends Component {
         const { commentModalOpen } = this.props
         
         if (commentModalOpen) {
-            console.log(this.props.comment)
             return (
                 <Dialog title="New comment" modal={true} open={commentModalOpen} autoScrollBodyContent={true}>
                     <CommentForm parentId={this.props.parentId} comment={this.props.comment}/>

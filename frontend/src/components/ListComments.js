@@ -7,6 +7,7 @@ import CommentShow from './CommentShow';
 
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
+import Snackbar from 'material-ui/Snackbar';
 
 class ListComments extends Component {
 
@@ -25,7 +26,7 @@ class ListComments extends Component {
     }
 
     render() {
-        const {comments} = this.props
+        const {comments, message} = this.props
         return (
             <div>
                 {this.state.loading ? (
@@ -45,7 +46,14 @@ class ListComments extends Component {
                             </div>
                         ) : (
                             <div>Nothing to show</div>
-                        )
+                        )}
+                        {message !== undefined ?
+                                <Snackbar
+                                    open={message !== ''}
+                                    message={message}
+                                    autoHideDuration={4000}
+                                />
+                                : ''
                         }
                     </div>
                 )}
@@ -55,6 +63,6 @@ class ListComments extends Component {
     }
 }
 
-const mapStateToProps = state => ({ comments: state.commentReducer.comments })
+const mapStateToProps = state => ({ comments: state.commentReducer.comments, message: state.commentReducer.messageComment })
 const mapDispatchToProps = { getByPost, vote}
 export default connect(mapStateToProps, mapDispatchToProps)(ListComments)

@@ -48,7 +48,7 @@ class CommentForm extends Component {
     }
 
     componentDidMount(){
-        if(this.props.comment !== 'undefined'){
+        if(this.props.comment.id !== undefined){
             this.setState({editComment:true})
             this.handleInitialize()
         }

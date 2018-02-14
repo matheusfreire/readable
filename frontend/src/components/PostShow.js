@@ -74,11 +74,14 @@ class PostShow extends Component {
                                     <ListComments postId={post.id} />
                                 </CardText>
                             </Card>
-                            <Snackbar
-                                open={message !== ''}
-                                message={message}
-                                autoHideDuration={4000}
-                            />
+                            {message !== undefined ?
+                                <Snackbar
+                                    open={message !== ''}
+                                    message={message}
+                                    autoHideDuration={4000}
+                                />
+                                : ''
+                            }
                         </Container>
                         
                     )}
