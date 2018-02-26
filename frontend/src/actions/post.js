@@ -6,7 +6,13 @@ import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, PO
 export const get = (postId) => {
     return (dispatch) => {
         return PostsApi.get(postId)
-            .then((post) => dispatch({ type: POST_LOADED, post: post, messagePost: null}))
+            .then((post) => {
+                if(post !== undefined && post.id !== undefined){
+                    dispatch({ type: POST_LOADED, post: post, messagePost: null})
+                } else {
+                    throw new Error('Record not found');
+                }
+            })
     }
 }
 

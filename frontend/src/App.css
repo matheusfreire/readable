@@ -62,3 +62,13 @@
   margin-left: 2%;
   margin-right: 2%;
 }
+.hgroup{
+  text-transform:uppercase;
+}
+.hgroup h1{margin-bottom:25px; font-size:80px;}
+.hgroup h1 span{display:inline-block; margin-left:5px; padding:2px; border:1px solid #CCCCCC; overflow:hidden;}
+.hgroup h1 span strong{display:inline-block; padding:0 20px 20px; border:1px solid #CCCCCC; font-weight:normal;}
+.hgroup h2{font-size:60px;}
+.hgroup h2 span{display:block; font-size:30px;}
+p{margin:25px 0 0 0; padding:0; font-size:16px;}
+p:first-child{margin-top:0;}

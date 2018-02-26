@@ -14,6 +14,7 @@ import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import SideMenu from './components/SideMenu';
+import NotFound from './components/NotFound';
 
 const titleStyle = {
     'textAlign': 'center',
@@ -47,7 +48,7 @@ class App extends Component {
                 <SideMenu />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    {/* <Route path="/about" component={() => (<h1>About TETEU</h1>)} /> */}
+                    <Route exact path="/404" component={NotFound} />
                     <Route path="/posts/new" component={PostForm} />
                     <Route exact path="/:category/:post_id/edit" component={PostForm} />
                     <Route exact path="/:category/:post_id" component={PostShow} />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get, vote } from '../actions/post';
+import {withRouter} from 'react-router-dom';
+
 import ListComments from './ListComments';
 import CommentModal from './CommentModal';
 import Tag from './Tag';
@@ -24,6 +26,8 @@ class PostShow extends Component {
         if (this.props.match.params.id !== 'undefined') {
             this.props.get(this.props.match.params.post_id).then(() => {
                 this.setState({ loading: false })
+            }).catch((err) => {
+                this.props.history.push('/404')
             })
         }
     }
@@ -36,55 +40,53 @@ class PostShow extends Component {
         const {post, message} = this.props
         return (
             <div >
-                
                 {this.state.loading ? (
                     <CircularProgress />
                 ) : (
-                        <Container>
-                            <Card>
-                                <CardHeader title={post.title} subtitle={post.author} actAsExpander={true}
-                                    showExpandableButton={true} />
-                                <CardActions>
-                                    <Tag category={post.category} />
-                                    <Row>
-                                        <Col sm="4" >
-                                            <FontIcon className="material-icons icon-right" color={blue500}
-                                                onClick={() => this.handleClick(post, 'upVote')}>
-                                                thumb_up
-                                            </FontIcon>
-                                            <span className="span-style">
-                                                {post.voteScore}
-                                            </span>
-                                            <FontIcon className="material-icons icon-left"
-                                                onClick={() => this.handleClick(post, 'downVote')}>
-                                                thumb_down
-                                            </FontIcon>
-                                        </Col>
-                                        <Col sm="4">
-                                            <CommentModal parentId={post.id} />
-                                        </Col>
-                                        <Col sm="4" className="right">
-                                            <div className="right">
-                                                <ActionAnnouncement /> {post.commentCount}
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </CardActions>
-                                <CardText expandable={true}>
-                                    <ListComments postId={post.id} />
-                                </CardText>
-                            </Card>
-                            {message !== undefined ?
-                                <Snackbar
-                                    open={message !== ''}
-                                    message={message}
-                                    autoHideDuration={4000}
-                                />
-                                : ''
-                            }
-                        </Container>
-                        
-                    )}
+                    <Container>
+                        <Card>
+                            <CardHeader title={post.title} subtitle={post.author} actAsExpander={true}
+                                showExpandableButton={true} />
+                            <CardActions>
+                                <Tag category={post.category} />
+                                <Row>
+                                    <Col sm="4" >
+                                        <FontIcon className="material-icons icon-right" color={blue500}
+                                            onClick={() => this.handleClick(post, 'upVote')}>
+                                            thumb_up
+                                        </FontIcon>
+                                        <span className="span-style">
+                                            {post.voteScore}
+                                        </span>
+                                        <FontIcon className="material-icons icon-left"
+                                            onClick={() => this.handleClick(post, 'downVote')}>
+                                            thumb_down
+                                        </FontIcon>
+                                    </Col>
+                                    <Col sm="4">
+                                        <CommentModal parentId={post.id} />
+                                    </Col>
+                                    <Col sm="4" className="right">
+                                        <div className="right">
+                                            <ActionAnnouncement /> {post.commentCount}
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </CardActions>
+                            <CardText expandable={true}>
+                                <ListComments postId={post.id} />
+                            </CardText>
+                        </Card>
+                        {message !== undefined ?
+                            <Snackbar
+                                open={message !== ''}
+                                message={message}
+                                autoHideDuration={4000}
+                            />
+                            : ''
+                        }
+                    </Container>
+                )}
             </div>
         );
     }
@@ -92,4 +94,4 @@ class PostShow extends Component {
 
 const mapStateToProps = state => ({ post: state.postReducer.post, message: state.postReducer.messagePost })
 const mapDispatchToProps = { get, vote }
-export default connect(mapStateToProps, mapDispatchToProps)(PostShow)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostShow))
