@@ -8,6 +8,8 @@ import {closeModal} from '../actions/comments';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 
+import swal from 'sweetalert';
+
 const renderTextField = ({
     input,
     label,
@@ -36,14 +38,22 @@ class CommentForm extends Component {
         this.props.closeModal()
     }
 
+    showSwal(message) {
+        swal("Succes", message, "success").then(() => {
+            this.props.closeModal();
+        });
+    }
+
     submit = (values) => {
         if(this.state.editComment){
             this.props.update({ id:this.props.comment.id,body: values.body, author: values.author}).then(() => {
-                this.closeModal();
+                this.showSwal("Comment updated successfully")
             })
         } else {
             const uuidv4 = require('uuid/v4');
-            this.props.create({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, parentId: this.props.parentId })
+            this.props.create({ id: uuidv4(), timestamp: Date.now(), title: values.title, body: values.body, author: values.author, parentId: this.props.parentId }).then(() => {
+                this.showSwal("Comment added successfully")
+            })
         }
     }
 
