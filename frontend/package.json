@@ -25,7 +25,8 @@
     "redux-multi": "^0.1.91",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
-    "svg-icon": "^0.8.2"
+    "svg-icon": "^0.8.2",
+    "sweetalert": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
