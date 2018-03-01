@@ -46,3 +46,9 @@ export const update = (post) => {
         return PostsApi.update(post.id,post.title,post.body,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
     }
 }
+
+export const order = (order) => {
+    return (dispatch) => {
+        dispatch({type: order})
+    }
+}
