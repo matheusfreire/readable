@@ -7,10 +7,10 @@ import ContentCreate from 'material-ui/svg-icons/content/create';
 import { blue500 } from 'material-ui/styles/colors';
 import { withRouter } from 'react-router-dom';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
+import ActionDelete from 'material-ui/svg-icons/action/delete'
 import { Row, Col } from 'reactstrap';
 import FontIcon from 'material-ui/FontIcon';
-
-import {vote } from '../actions/post';
+import {vote, remove } from '../actions/post';
 
 function CardPost(props) {
 
@@ -21,6 +21,10 @@ function CardPost(props) {
     const editPost = (category, postId) => {
         let link = `/${category}/${postId}/edit`;
         props.history.push(link);
+    }
+
+    const removePost = (post) => {
+        props.remove(post)
     }
 
     const vote = (post, type) => {
@@ -54,6 +58,8 @@ function CardPost(props) {
                         </Col>
                         <Col sm="4" className="right">
                             <div className="right">
+                                <FlatButton label="" onClick={() => { removePost(props.post) }}
+                                    icon={<ActionDelete />} />
                                 <ActionAnnouncement /> {props.post.commentCount}
                             </div>
                         </Col>
@@ -69,7 +75,7 @@ function CardPost(props) {
     )
 }
 
-const mapDispatchToProps = { vote }
+const mapDispatchToProps = { vote, remove }
 export default compose(
     withRouter,
     connect(null, mapDispatchToProps)

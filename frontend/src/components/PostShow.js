@@ -18,6 +18,9 @@ import Snackbar from 'material-ui/Snackbar';
 import FlatButton from 'material-ui/FlatButton';
 import ContentCreate from 'material-ui/svg-icons/content/create';
 import { Divider } from 'material-ui';
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+
+import swal from 'sweetalert';
 
 class PostShow extends Component {
 
@@ -42,6 +45,14 @@ class PostShow extends Component {
     editPost = (category,postId) => {
         let link = `/${category}/${postId}/edit`;
         this.props.history.push(link);
+    }
+
+    removePost = (post) => {
+        this.props.remove(post).then(
+            swal("Succes", "Post removed successfully", "success").then((value) => {
+                this.props.history.push('/');
+            })
+        )
     }
 
     render() {
@@ -78,6 +89,8 @@ class PostShow extends Component {
                                     </Col>
                                     <Col sm="4" className="right">
                                         <div className="right">
+                                            <FlatButton label="" onClick={() => { this.removePost(post) }}
+                                                icon={<ActionDelete />} />
                                             <ActionAnnouncement /> {post.commentCount}
                                         </div>
                                     </Col>

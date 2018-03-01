@@ -1,4 +1,4 @@
-import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_LOADED, POST_CREATED, POST_UPDATED, POSTS_ORDERED_UP_VOTED, POSTS_ORDERED_DOWN_VOTED, POSTS_ORDERED_MORE_RECENT, POSTS_ORDERED_LESS_RECENT} from '../utils/ActionTypes'
+import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_LOADED, POST_CREATED, POST_UPDATED, POSTS_ORDERED_UP_VOTED, POSTS_ORDERED_DOWN_VOTED, POSTS_ORDERED_MORE_RECENT, POSTS_ORDERED_LESS_RECENT, POST_REMOVED} from '../utils/ActionTypes'
 
 const INITIAL_STATE = {
     post: {},
@@ -13,11 +13,12 @@ export default (state = INITIAL_STATE, action) => {
         case POST_CREATED:
             return {...state, post: action.post}
         case POSTS_SEARCHED:
-            return { ...state, list: action.posts}
         case POSTS_SEARCHED_BY_CATEGORY:
             return { ...state, list: action.posts}
         case POST_VOTED:
             return { ...state, post: action.postVoted}
+        case POST_REMOVED:
+            return {...state,list: state.list.filter((p) => p.id !== action.post.id)}
         case POSTS_ORDERED_UP_VOTED:
             let posts = state.list.sort(orderByUpVoted);
             return {...state, list: posts}

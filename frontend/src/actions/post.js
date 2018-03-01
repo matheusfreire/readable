@@ -1,6 +1,6 @@
 
 import * as PostsApi from '../utils/PostsAPI';
-import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, POST_LOADED, POST_UPDATED } from "../utils/ActionTypes";
+import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, POST_LOADED, POST_UPDATED, POST_REMOVED } from "../utils/ActionTypes";
 
 export const get = (postId) => {
     return (dispatch) => {
@@ -44,6 +44,12 @@ export const add = (post) => {
 export const update = (post) => {
     return (dispatch) => {
         return PostsApi.update(post.id,post.title,post.body,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
+    }
+}
+
+export const remove = (post) => {
+    return (dispatch) => {
+        return PostsApi.remove(post.id).then((post) => dispatch({type: POST_REMOVED, post: post}))
     }
 }
 
