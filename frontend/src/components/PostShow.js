@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { get, vote } from '../actions/post';
 import {withRouter} from 'react-router-dom';
+import { compose } from 'redux';
 
 import ListComments from './ListComments';
 import CommentModal from './CommentModal';
@@ -14,7 +15,9 @@ import FontIcon from 'material-ui/FontIcon';
 import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
 import { Container, Row, Col } from 'reactstrap';
 import Snackbar from 'material-ui/Snackbar';
-
+import FlatButton from 'material-ui/FlatButton';
+import ContentCreate from 'material-ui/svg-icons/content/create';
+import { Divider } from 'material-ui';
 
 class PostShow extends Component {
 
@@ -36,6 +39,11 @@ class PostShow extends Component {
         this.props.vote(post, type)
     }
 
+    editPost = (category,postId) => {
+        let link = `/${category}/${postId}/edit`;
+        this.props.history.push(link);
+    }
+
     render() {
         const {post, message} = this.props
         return (
@@ -51,6 +59,8 @@ class PostShow extends Component {
                                 <Tag category={post.category} />
                                 <Row>
                                     <Col sm="4" >
+                                        <FlatButton  label="Edit" onClick={() =>{this.editPost(post.category,post.id)}} 
+                                            icon={<ContentCreate />}/>
                                         <FontIcon className="material-icons icon-right" color={blue500}
                                             onClick={() => this.handleClick(post, 'upVote')}>
                                             thumb_up
@@ -74,6 +84,10 @@ class PostShow extends Component {
                                 </Row>
                             </CardActions>
                             <CardText expandable={true}>
+                                <Divider />
+                                {post.body}
+                                <br />
+                                <br />
                                 <ListComments postId={post.id} />
                             </CardText>
                         </Card>
@@ -94,4 +108,7 @@ class PostShow extends Component {
 
 const mapStateToProps = state => ({ post: state.postReducer.post, message: state.postReducer.messagePost })
 const mapDispatchToProps = { get, vote }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostShow))
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(PostShow)

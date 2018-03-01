@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import {compose} from 'redux';
 import { connect } from 'react-redux';
 import { add, update, get } from '../actions/post';
 import { Field, reduxForm } from 'redux-form';
@@ -171,4 +172,7 @@ PostForm = reduxForm({ form: 'postForm', validate })(PostForm)
 
 const mapStateToProps = state => ({ post: state.postReducer.post, categories: state.categoriesReducer.categories })
 const mapDispatchToProps = { add, getAllCategories, update, get }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostForm))
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(PostForm)

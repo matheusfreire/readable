@@ -5,7 +5,7 @@ class NotFound extends Component {
     render() {
         return (
             <Container>
-                <div class="hgroup">
+                <div className="hgroup">
                     <h1><span><strong>4</strong></span><span><strong>0</strong></span><span><strong>4</strong></span></h1>
                     <h2>Error ! <span>Page Not Found</span></h2>
                 </div>

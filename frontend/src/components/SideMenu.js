@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
-
+import {compose} from 'redux';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
@@ -86,4 +86,7 @@ class SideMenu extends Component {
 
 const mapStateToProps = state => ({ open: state.sideMenuReducer.open,categories: state.categoriesReducer.categories })
 const mapDispatchToProps = { close, getAllCategories }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideMenu))
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(SideMenu)

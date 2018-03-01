@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
+import {compose} from 'redux';
 import { Route, Switch,withRouter } from 'react-router';
 import {open} from './actions/sidemenu';
 
@@ -48,11 +49,11 @@ class App extends Component {
                 <SideMenu />
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/404" component={NotFound} />
                     <Route path="/posts/new" component={PostForm} />
                     <Route exact path="/:category/:post_id/edit" component={PostForm} />
                     <Route exact path="/:category/:post_id" component={PostShow} />
                     <Route path="/:category" component={ListPostByCategory} />
+                    <Route path='/' component={NotFound} />
                 </Switch>
                 {!currentPath.includes(`posts/new`) ? 
                     <FloatingActionButton className="fab" onClick={this.handleClickNewPost}>
@@ -66,4 +67,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({ open: state.sideMenuReducer.open })
 const mapDispatchToProps = { open }
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(App)

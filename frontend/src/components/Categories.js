@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {compose} from 'redux';
 import {getAllCategories} from '../actions/categories';
 
 import {withRouter} from 'react-router-dom';
@@ -35,4 +36,7 @@ class Categories extends Component {
 
 const mapStateToProps = state => ({categories: state.categoriesReducer.categories})
 const mapDispatchToProps = { getAllCategories}
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Categories))
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Categories)
