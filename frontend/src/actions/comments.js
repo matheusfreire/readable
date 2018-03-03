@@ -16,36 +16,36 @@ export const vote = (comment, vote) => {
 
 export const get = (commentId) => {
     return (dispatch)=> {
-        return CommentApi.get(commentId).then((comment) => dispatch({type:GET_COMMENT, comment: comment, messageComment: null}))
+        return CommentApi.get(commentId).then((comment) => dispatch({type:GET_COMMENT, comment: comment}))
     }
 }
 
 export const create = (comment) => {
     return (dispatch) => {
-        return CommentApi.create(comment).then((comment) => dispatch({type: ADD_COMMENT, comment: comment, messageComment: 'New comment added successfully'}))
+        return CommentApi.create(comment).then((comment) => dispatch({type: ADD_COMMENT, comment: comment}))
     }
 }
 
 export const update = (comment) => {
     return (dispatch) => {
-        return CommentApi.update(comment).then((comment) => dispatch({type: UPDATE_COMMENT, comment: comment, messageComment: 'New comment updated successfully'}))
+        return CommentApi.update(comment).then((comment) => dispatch({type: UPDATE_COMMENT, comment: comment}))
     }
 }
 
 export const remove = (comment) => {
     return (dispatch) => {
-        return CommentApi.remove(comment).then(() => dispatch({type: REMOVE_COMMENT, comment: comment, messageComment: 'New comment removed successfully'}))
+        return CommentApi.remove(comment).then(() => dispatch({type: REMOVE_COMMENT, comment: comment}))
     }
 }
 
 export const editComment = (comment) => {
-    return {type: EDIT_COMMENT, comment: comment, messageComment: null}
+    return {type: EDIT_COMMENT, comment: comment}
 }
 
 export const openModal = () => {
-    return {type: OPEN_MODAL, messageComment: null}
+    return {type: OPEN_MODAL}
 }
 
 export const closeModal = () => {
-    return {type: CLOSE_MODAL, messageComment: null}
+    return {type: CLOSE_MODAL}
 }

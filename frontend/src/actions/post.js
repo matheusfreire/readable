@@ -7,7 +7,7 @@ export const get = (postId) => {
         return PostsApi.get(postId)
             .then((post) => {
                 if(post !== undefined && post.id !== undefined){
-                    dispatch({ type: POST_LOADED, post: post, messagePost: null})
+                    dispatch({ type: POST_LOADED, post: post})
                 } else {
                     throw new Error('Record not found');
                 }
@@ -37,13 +37,13 @@ export const vote = (post, vote) => {
 
 export const add = (post) => {
     return (dispatch) => {
-        return PostsApi.create(post.id,post.timestamp,post.title,post.body,post.author,post.category).then((post) => dispatch({type: POST_UPDATED, post: post}))
+        return PostsApi.create(post.id,post.timestamp,post.title,post.body,post.author,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
     }
 }
 
 export const update = (post) => {
     return (dispatch) => {
-        return PostsApi.update(post.id,post.title,post.body,post.category).then((post) => dispatch({type: POST_CREATED, post: post}))
+        return PostsApi.update(post.id,post.title,post.body,post.category).then((post) => dispatch({type: POST_UPDATED, post: post}))
     }
 }
 
