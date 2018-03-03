@@ -5,7 +5,7 @@ import fetchMock from 'fetch-mock'
 
 import * as actions from '../../actions/post'
 import { api, headers} from '../../utils/Api'
-import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, POST_LOADED, POST_UPDATED, POST_REMOVED } from "../../utils/ActionTypes";
+import {POSTS_SEARCHED, POST_VOTED, POSTS_SEARCHED_BY_CATEGORY, POST_CREATED, POST_LOADED, POST_UPDATED, POST_REMOVED, POSTS_ORDERED_DOWN_VOTED } from "../../utils/ActionTypes";
 
 const middlewares = [multi, thunk]
 const mockStore = configureStore(middlewares)

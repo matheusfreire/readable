@@ -49,6 +49,18 @@ describe('Comments Actions', () => {
         })
     })
 
+    it('fetch comment using ID dispatch GET_COMMENT', () => {
+
+        fetchMock.once('end:/comments/qwerty123', {body: comment1, headers })
+
+        const expectedActions = [{ type: GET_COMMENT, comment: comment1 }]
+        const store = mockStore({ comments: [] })
+
+        return store.dispatch(actions.get('qwerty123')).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
+        })
+    })
+
 
     it('create a new comment and dispatch ADD_COMMENT', () => {
 
