@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { get, vote } from '../actions/post';
+import { get, vote, remove } from '../actions/post';
 import {withRouter} from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -120,7 +120,7 @@ class PostShow extends Component {
 }
 
 const mapStateToProps = state => ({ post: state.postReducer.post, message: state.postReducer.messagePost })
-const mapDispatchToProps = { get, vote }
+const mapDispatchToProps = { get, vote, remove }
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
