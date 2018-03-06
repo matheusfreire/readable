@@ -16,7 +16,13 @@ export default (state = INITIAL_STATE, action) => {
         case POSTS_SEARCHED_BY_CATEGORY:
             return { ...state, list: action.posts}
         case POST_VOTED:
-            return { ...state, post: action.postVoted}
+            let newListVoted = state.list.map((p) => {
+                if (p.id === action.postVoted.id) {
+                    return action.postVoted;
+                }
+                return p
+            })
+            return { ...state,post: action.postVoted, list: newListVoted}
         case POST_REMOVED:
             return {...state,list: state.list.filter((p) => p.id !== action.post.id)}
         case POSTS_ORDERED_UP_VOTED:

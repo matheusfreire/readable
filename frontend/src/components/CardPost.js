@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
@@ -10,69 +10,73 @@ import ActionAnnouncement from 'material-ui/svg-icons/action/announcement'
 import ActionDelete from 'material-ui/svg-icons/action/delete'
 import { Row, Col } from 'reactstrap';
 import FontIcon from 'material-ui/FontIcon';
-import {vote, remove } from '../actions/post';
+import { vote, remove } from '../actions/post';
 
-function CardPost(props) {
+class CardPost extends Component {
 
-    const handleClick = (category, postId) => {
+    handleClick = (category, postId) => {
         let link = `/${category}/${postId}`;
-        props.history.push(link);
+        this.props.history.push(link);
     }
-    const editPost = (category, postId) => {
+    editPost = (category, postId) => {
         let link = `/${category}/${postId}/edit`;
-        props.history.push(link);
+        this.props.history.push(link);
     }
 
-    const removePost = (post) => {
-        props.remove(post)
+    removePost = (post) => {
+        this.props.remove(post)
     }
 
-    const vote = (post, type) => {
-        props.vote(post, type)
+    vote = (post, type) => {
+        this.props.vote(post, type)
     }
-    return (
-        <div>
-            <Card>
-                <CardHeader title={props.post.title} subtitle={props.post.author}
-                    actAsExpander={true}
-                    showExpandableButton={true} />
-                <CardActions>
-                    <Row>
-                        <Col sm="4" >
-                            <FlatButton label="Edit" onClick={() => { editPost(props.post.category, props.post.id) }}
-                                icon={<ContentCreate />} />
-                            <FontIcon className="material-icons icon-right" color={blue500}
-                                onClick={() => vote(props.post, 'upVote')}>
-                                thumb_up
-                                        </FontIcon>
-                            <span className="span-style">
-                                {props.post.voteScore}
-                            </span>
-                            <FontIcon className="material-icons icon-left"
-                                onClick={() => this.vote(props.post, 'downVote')}>
-                                thumb_down
-                            </FontIcon>
-                        </Col>
-                        <Col sm="4">
-                            <FlatButton label="Show comments" onClick={() => { handleClick(props.post.category, props.post.id) }} />
-                        </Col>
-                        <Col sm="4" className="right">
-                            <div className="right">
-                                <FlatButton label="" onClick={() => { removePost(props.post) }}
-                                    icon={<ActionDelete />} />
-                                <ActionAnnouncement /> {props.post.commentCount}
-                            </div>
-                        </Col>
-                    </Row>
-                    
-                </CardActions>
-                <CardText expandable={true}>
-                    {props.post.body}
-                </CardText>
-            </Card>
-            <br />
-        </div>
-    )
+
+    render() {
+        return (
+            <div>
+                <Card>
+                    <CardHeader title={this.props.post.title} subtitle={this.props.post.author}
+                        actAsExpander={true}
+                        showExpandableButton={true} />
+                    <CardActions>
+                        <Row>
+                            <Col sm="4" >
+                                <FlatButton label="Edit" onClick={() => { this.editPost(this.props.post.category, this.props.post.id) }}
+                                    icon={<ContentCreate />} />
+                                <FontIcon className="material-icons icon-right" color={blue500}
+                                    onClick={() => this.vote(this.props.post, 'upVote')}>
+                                    thumb_up
+                                            </FontIcon>
+                                <span className="span-style">
+                                    {this.props.post.voteScore}
+                                </span>
+                                <FontIcon className="material-icons icon-left"
+                                    onClick={() => this.vote(this.props.post, 'downVote')}>
+                                    thumb_down
+                                </FontIcon>
+                            </Col>
+                            <Col sm="4">
+                                <FlatButton label="Show comments" onClick={() => { this.handleClick(this.props.post.category, this.props.post.id) }} />
+                            </Col>
+                            <Col sm="4" className="right">
+                                <div className="right">
+                                    <FlatButton label="" onClick={() => { this.removePost(this.props.post) }}
+                                        icon={<ActionDelete />} />
+                                    <ActionAnnouncement /> {this.props.post.commentCount}
+                                </div>
+                            </Col>
+                        </Row>
+
+                    </CardActions>
+                    <CardText expandable={true}>
+                        {this.props.post.body}
+                    </CardText>
+                </Card>
+                <br />
+            </div>
+        )
+    }
+
 }
 
 const mapDispatchToProps = { vote, remove }
